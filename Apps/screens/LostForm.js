@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {Picker, Text, StyleSheet, View, TextInput, Button,ImageBackground} from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
+import {Text, StyleSheet, View, TextInput, Button,ImageBackground, Keyboard} from 'react-native';
+import {Picker} from '@react-native-picker/picker';
 
 const App = ({navigation}) => {
     const [pet, setPet] = useState('Dog');
