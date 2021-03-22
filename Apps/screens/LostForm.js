@@ -62,7 +62,7 @@ const App = ({navigation}) => {
           <Text style={styles.baseText}>
             How Dangerous?
            </Text>
-          <Picker>
+          <Picker
           selectedValue= {danger}
             onValueChange={danger => setDanger(danger)}>
           <Picker.Item label = "Always Harmless"></Picker.Item>
@@ -76,7 +76,7 @@ const App = ({navigation}) => {
         
     
    
-      <Picker>
+      <Picker
           selectedValue={color}
           onValueChange={pet => setColor(pet)}>
         <Picker.Item label = "Black"></Picker.Item>
