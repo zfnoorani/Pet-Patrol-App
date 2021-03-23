@@ -9,6 +9,9 @@ const App = ({navigation}) => {
     const [name, setName] = useState('FirstName');
     const [lastName, setLastName] = useState('LastName');
     const [danger, setDanger] = useState('Dangerous');
+    const [breed, setBreed] = useState('Unknown')
+    const [info, setInfo] = useState('Unknown')
+
     console.log(lastName)
     
    
@@ -88,8 +91,8 @@ const App = ({navigation}) => {
         <Picker.Item label = "Blonde"></Picker.Item>
         <Picker.Item label = "Other"></Picker.Item>
       </Picker>
-      <TextInput style={styles.textify} placeholder='Breed' onSubmitEditing={Keyboard.dismiss}/>
-      <TextInput style={styles.textify} placeholder='Additional Info' onSubmitEditing={Keyboard.dismiss}/>
+      <TextInput placeholder='Breed' selectedValue={breed} onChangeText={breed => setBreed(breed)} />
+      <TextInput style={styles.textify} placeholder='Additional Info' onSubmitEditing={Keyboard.dismiss} selectedValue={info} onChangeText={info => setInfo(info)}/>
         <Button
             title="Submit"
    
@@ -100,7 +103,9 @@ const App = ({navigation}) => {
                 itemName: pet,
                 timeStamp: time,
                 colorName: color,
-                danger: danger 
+                danger: danger, 
+                breed: breed,
+                info: info
    
                 
               });
