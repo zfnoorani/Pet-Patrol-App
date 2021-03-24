@@ -4,7 +4,7 @@
 
 
 * This should install any dependencies in the program.
-* Must use **Expo install** not npm nor yarn. It will cause issues. 
+* Must use **`expo install`** not npm nor yarn. It will cause issues. 
  
 
 ### If this does not work:
