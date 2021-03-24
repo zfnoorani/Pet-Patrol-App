@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {Text, StyleSheet, View, TextInput, Button,ImageBackground, Keyboard} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+
 
 
 const App = ({navigation}) => {
@@ -16,6 +18,7 @@ const App = ({navigation}) => {
     const [date, setDate] = useState(new Date(1598051730000));
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
+  
   var tempDate="Ddate";
 
   const onChange = (event, selectedDate) => {
@@ -47,18 +50,22 @@ const App = ({navigation}) => {
 
     console.log(lastName)
     
-   
-   
+    
+
    
    
     
    
     return (
+      
+          
       <ImageBackground
       style={styles.background} 
       source={require('../assets/pawprints.jpg')}>
         
       <View >
+      
+    
         <Text >Find Pet Form </Text>
         <View>
           <TextInput 
@@ -107,18 +114,9 @@ const App = ({navigation}) => {
           
         />
       )}
-          <Picker
-            selectedValue= {time}
-            onValueChange={time => setTime(time)}>
-              <Picker.Item label = "<1 hr"></Picker.Item>
-              <Picker.Item label = "1 - 6 hr"></Picker.Item>
-              <Picker.Item label = "6 hr - 1 day"></Picker.Item>
-              <Picker.Item label = "1 - 4 days"></Picker.Item>
-              <Picker.Item label = "4 - 10 days"></Picker.Item>
-              <Picker.Item label = "10+ days"></Picker.Item>
-          </Picker>
+          
           <Text style={styles.baseText}>
-            How Dangerous?
+            How Dangerous was the pet?
            </Text>
           <Picker
           selectedValue= {danger}
@@ -129,7 +127,7 @@ const App = ({navigation}) => {
           <Picker.Item label = "Very Dangerous"></Picker.Item>
       </Picker>
       <Text style={styles.baseText}>
-          What Color         
+          What Color was the pet you found?        
         </Text>
         
     
@@ -147,6 +145,8 @@ const App = ({navigation}) => {
         <Picker.Item label = "Other"></Picker.Item>
       </Picker>
       <TextInput placeholder='Breed' selectedValue={breed} onChangeText={breed => setBreed(breed)} />
+      <TextInput style={styles.textify} placeholder='What town did you find the pet in?' onSubmitEditing={Keyboard.dismiss} selectedValue={info} onChangeText={info => setInfo(info)}/>
+
       <TextInput style={styles.textify} placeholder='Additional Info' onSubmitEditing={Keyboard.dismiss} selectedValue={info} onChangeText={info => setInfo(info)}/>
         <Button
             title="Submit"
