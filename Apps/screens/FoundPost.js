@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import {Text, StyleSheet, View, TextInput, Button,ImageBackground, Keyboard} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
+import DateTimePicker from '@react-native-community/datetimepicker';
+
 
 const App = ({navigation}) => {
     const [pet, setPet] = useState('Dog');
@@ -11,6 +13,37 @@ const App = ({navigation}) => {
     const [danger, setDanger] = useState('Dangerous');
     const [breed, setBreed] = useState('Unknown')
     const [info, setInfo] = useState('Unknown')
+    const [date, setDate] = useState(new Date(1598051730000));
+  const [mode, setMode] = useState('date');
+  const [show, setShow] = useState(false);
+  var tempDate="Ddate";
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === 'ios');
+    setDate(currentDate);
+    tempDate=currentDate;
+    console.log(currentDate)
+    
+    
+
+  };
+
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  };
+
+  const showDatepicker = () => {
+    showMode('date');
+  };
+
+  const showTimepicker = () => {
+    showMode('time');
+  };
+    
+
+    
 
     console.log(lastName)
     
@@ -24,6 +57,7 @@ const App = ({navigation}) => {
       <ImageBackground
       style={styles.background} 
       source={require('../assets/pawprints.jpg')}>
+        
       <View >
         <Text >Find Pet Form </Text>
         <View>
@@ -50,8 +84,29 @@ const App = ({navigation}) => {
             <Picker.Item label="NGN" value="Naira" />
           </Picker>
           <Text style={styles.baseText}>
-            How long has it been missing. 
-           </Text>
+            When did you find it?
+
+            </Text>
+
+      <View>
+        <Button onPress={showDatepicker} title="Enter Date Pet was found" />
+      </View>
+      <View>
+        <Button onPress={showTimepicker} title="Enter Time Pet was found"/>
+      </View>
+      {show && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode={mode}
+          is24Hour={true}
+          display="default"
+          onChange={onChange}          
+          
+
+          
+        />
+      )}
           <Picker
             selectedValue= {time}
             onValueChange={time => setTime(time)}>
@@ -68,10 +123,10 @@ const App = ({navigation}) => {
           <Picker
           selectedValue= {danger}
             onValueChange={danger => setDanger(danger)}>
-          <Picker.Item label = "Always Harmless"></Picker.Item>
-          <Picker.Item label = "Usually Harmless"></Picker.Item>
-          <Picker.Item label = "Less often than not harmless"></Picker.Item>
-          <Picker.Item label = "You will be attacked"></Picker.Item>
+          <Picker.Item label = "Harmless"></Picker.Item>
+          <Picker.Item label = "Mostly Harmless"></Picker.Item>
+          <Picker.Item label = "Dangerous"></Picker.Item>
+          <Picker.Item label = "Very Dangerous"></Picker.Item>
       </Picker>
       <Text style={styles.baseText}>
           What Color         
