@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {Text, StyleSheet, View, TextInput, Button,ImageBackground, Keyboard} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
 
 
