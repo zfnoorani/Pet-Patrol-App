@@ -6,6 +6,7 @@ import SignInScreen from './Apps/screens/SignInScreen';
 import Flyer from './Apps/screens/Flyer';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+
  
  
 const Stack = createStackNavigator();
