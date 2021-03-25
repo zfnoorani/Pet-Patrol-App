@@ -12,4 +12,10 @@
   *  `expo install @react-native-picker`
   *  `expo install @react-native-community/datetimepicker`
 
+Install 
+npm install express
+npm install body-parser
+npm install mariadb
+Let Kristen know if it doesn't work
+
 
