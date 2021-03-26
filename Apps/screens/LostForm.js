@@ -1,8 +1,11 @@
 import React, {useState} from 'react';
-import {Text, StyleSheet, View, TextInput, Button,ImageBackground, Keyboard} from 'react-native';
+import {Text, StyleSheet, View, TextInput, Button,ImageBackground, Keyboard, SafeAreaView, ScrollView} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
+import { roundToNearestPixel } from 'react-native/Libraries/Utilities/PixelRatio';
+
 
 const App = ({navigation}) => {
+  
     const [pet, setPet] = useState('Dog');
     const [time, setTime] = useState('<1 hour');
     const [color, setColor] = useState('Black');
@@ -18,6 +21,8 @@ const App = ({navigation}) => {
     
    
     return (
+      <SafeAreaView>
+    <ScrollView>
       <ImageBackground
       style={styles.background} 
       source={require('../assets/pawprints.jpg')}>
@@ -101,17 +106,22 @@ const App = ({navigation}) => {
                 timeStamp: time,
                 colorName: color,
                 danger: danger 
-   
+            
                 
+            
               });
+
+              
             }}
     />
    
         </View>
       </View>
       </ImageBackground>
-   
+      </ScrollView>
+      </SafeAreaView>
     );
+    
   };
   const styles = StyleSheet.create({
     background: {

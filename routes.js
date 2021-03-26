@@ -36,6 +36,6 @@ connection.getConnection()
       //not connected
     });
 
-app.listen(9000, () => {
+/*app.listen(9000, () => {
     console.log('Go to https://localhost:9000/ users so you can see the data');
-});
+});*/
