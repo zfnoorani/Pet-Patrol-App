@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const mariadb = require('mariadb');
 
 const connection = mariadb.createPool({
-    host: 'localhost',
+    host: 'database4pets.cjsizb3akwju.us-east-2.rds.amazonaws.com',
     user: 'root',
     password: 'Ksulli0523',
     database: 'Pets'
