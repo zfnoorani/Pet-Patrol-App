@@ -9,8 +9,8 @@ const App = ({navigation}) => {
     const [name, setName] = useState('FirstName');
     const [lastName, setLastName] = useState('LastName');
     const [danger, setDanger] = useState('Dangerous');
-    const [breed, setBreed] = useState('Unknown')
-    const [info, setInfo] = useState('Unknown')
+    const [breed, setBreed] = useState('Unknown');
+    const [info, setInfo] = useState('Unknown');
 
     console.log(lastName)
     
