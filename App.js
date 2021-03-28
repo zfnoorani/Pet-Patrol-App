@@ -5,6 +5,7 @@ import LostForm from './Apps/screens/LostForm';
 import SignInScreen from './Apps/screens/SignInScreen';
 import Flyer from './Apps/screens/Flyer';
 import FoundPost from './Apps/screens/FoundPost';
+import Feed from './Apps/screens/Feed';
 
 import MenuScreen from './Apps/screens/MenuScreen';
 import { NavigationContainer } from '@react-navigation/native';
@@ -17,7 +18,8 @@ function App() {
   return (
     <NavigationContainer>
  
-    <Stack.Navigator initialRouteName="FoundPost" >
+    <Stack.Navigator initialRouteName="Feed" >
+    <Stack.Screen name="Feed" component={Feed} options={{title: 'Feed'}} />
     <Stack.Screen name="Flyer" component={Flyer} options={{title: 'Flyer'}} />
     <Stack.Screen name="MenuScreen" component={MenuScreen} options={{title: 'MenuScreen'}} />
     <Stack.Screen name="FoundPost" component={FoundPost} options={{title: 'FoundPost'}} />
