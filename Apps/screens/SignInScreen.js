@@ -1,7 +1,7 @@
 import React from 'react';
 import {ImageBackground, StyleSheet, Text, View, TextInput, Keyboard, Button} from "react-native";
 import {useDimensions, useDeviceOrientation} from '@react-native-community/hooks';
-
+import Feed from './Feed'
 
 function SignInScreen(props) {
     const orientation = useDeviceOrientation();
@@ -15,14 +15,20 @@ function SignInScreen(props) {
                 
                 <TextInput style={styles.username} placeholder='username' onSubmitEditing={Keyboard.dismiss}/>
                 <TextInput style={styles.password} placeholder='password' onSubmitEditing={Keyboard.dismiss}/>
-                <Button title="Submit" />
+                <Button id="submit" title="Submit" />
                 <Button title="Sign-up" />
+                <script>
+                    document.getElementById("submit").addEventListener("click", submitFunc())
+                </script>
             </View>
             
         </ImageBackground>
     );
 }
 
+function submitFunc(){
+    return Feed
+}
 
 const styles = StyleSheet.create({
     background: {
