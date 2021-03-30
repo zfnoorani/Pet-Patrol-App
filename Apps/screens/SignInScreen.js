@@ -1,9 +1,12 @@
 import React from 'react';
-import {ImageBackground, StyleSheet, Text, View, TextInput, Keyboard, Button} from "react-native";
+import {ImageBackground, StyleSheet, Text, View, TextInput, Keyboard, Button, script} from "react-native";
 import {useDimensions, useDeviceOrientation} from '@react-native-community/hooks';
 import Feed from './Feed'
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-function SignInScreen(props) {
+
+function SignInScreen({ navigation }) {
     const orientation = useDeviceOrientation();
 
     return (
@@ -15,11 +18,8 @@ function SignInScreen(props) {
                 
                 <TextInput style={styles.username} placeholder='username' onSubmitEditing={Keyboard.dismiss}/>
                 <TextInput style={styles.password} placeholder='password' onSubmitEditing={Keyboard.dismiss}/>
-                <Button id="submit" title="Submit" />
+                <Button title="Submit" onPress={() => navigation.navigate('Feed')} />
                 <Button title="Sign-up" />
-                <script>
-                    document.getElementById("submit").addEventListener("click", submitFunc())
-                </script>
             </View>
             
         </ImageBackground>
