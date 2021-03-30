@@ -11,11 +11,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
  
  
-const Stack = createStackNavigator();
+//const Stack = createStackNavigator();
  
 function App() {
   return (
-    <NavigationContainer>
+    /*<NavigationContainer>
  
     <Stack.Navigator initialRouteName="FoundPost" >
     <Stack.Screen name="Flyer" component={Flyer} options={{title: 'Flyer'}} />
@@ -28,8 +28,8 @@ function App() {
       
       
     </Stack.Navigator>
-    </NavigationContainer>
- 
+    </NavigationContainer>*/
+      SignInScreen
   );
 }
 export default App;
