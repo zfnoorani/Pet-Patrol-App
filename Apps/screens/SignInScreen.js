@@ -20,8 +20,8 @@ function SignInScreen({ navigation }) {
                 
                 <TextInput style={styles.username} placeholder='Username' onSubmitEditing={Keyboard.dismiss}/>
                 <TextInput style={styles.password} placeholder='Password' onSubmitEditing={Keyboard.dismiss}/>
-                <Button title="Submit"  onPress={() => navigation.navigate('Feed')} />
-                <Button title="Sign-In" onPress={() => navigation.navigate('SignUpScreen')} />
+                <Button title="Submit"  onPress={() => navigation.navigate('MenuScreen')} />
+                <Button title="Sign-In" onPress={() => navigation.navigate('SignUpNewScreen')} />
             </View>
             
         </ImageBackground>
