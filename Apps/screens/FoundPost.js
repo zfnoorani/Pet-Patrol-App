@@ -11,6 +11,7 @@ import {
 import { Picker } from "@react-native-picker/picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { database } from "../../fbconfig";
+import { useEffect } from "react";
 
 const App = ({ navigation }) => {
   const [pet, setPet] = useState("Dog");
@@ -24,7 +25,7 @@ const App = ({ navigation }) => {
   const [date, setDate] = useState(new Date(1598051730000));
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
-
+  const [valuefrom, setvaluefrom] = useState("");
   var tempDate = "Ddate";
 
   const onChange = (event, selectedDate) => {
@@ -33,6 +34,18 @@ const App = ({ navigation }) => {
     setDate(currentDate);
     tempDate = currentDate;
     console.log(currentDate);
+  };
+
+  const firestoreAutoId = () => {
+    const CHARS =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    let autoId = "";
+
+    for (let i = 0; i < 20; i++) {
+      autoId += CHARS.charAt(Math.floor(Math.random() * CHARS.length));
+    }
+    return autoId;
   };
 
   const showMode = (currentMode) => {
@@ -51,13 +64,51 @@ const App = ({ navigation }) => {
   console.log(lastName);
 
   const readdata = () => {
-    var starCountRef = database.ref("/");
-    starCountRef.on("value", (snapshot) => {
+    // let arr = [
+    //   { name: "abeer", id: firestoreAutoId() },
+    //   { name: "zamin", id: firestoreAutoId() },
+    // ];
+    // console.log(arr);
+    // let obj = {};
+    // arr.map((item) => {
+    //   obj[item.id] = item;
+    // });
+
+    // console.log(obj);
+
+    // let carr = Object.keys(obj).map((item) => {
+    //   return obj[item];
+    // });
+    // console.log(carr);
+    console.log("running");
+    var starCountRef = database.ref("/users");
+    starCountRef.once("value", (snapshot) => {
       const data = snapshot.val();
-      console.log(data);
+console.log(data)
+let carr = Object.keys(data).map((item) => {
+  return data[item];
+});
+console.log(carr)
+      // setvaluefrom(data);
     });
   };
-
+  useEffect(readdata, []);
+  const writeData = () => {
+    // let arr = [
+    //   { name: "abeer", id: firestoreAutoId() },
+    //   { name: "zamin", id: firestoreAutoId() },
+    // ];
+    // console.log(arr);
+    // let obj = {};
+    // arr.map((item) => {
+    //   obj[item.id] = item;
+    // });
+let obj={
+  name:'ali',
+  id:'22'
+}
+    database.ref("users/50W4TUPzgtUdnLcNp3xY").set(obj);
+  };
   return (
     <ImageBackground
       style={styles.background}
@@ -76,7 +127,7 @@ const App = ({ navigation }) => {
             selectedValue={lastName}
             onChangeText={(lastName) => setLastName(lastName)}
           />
-
+          <Text style={styles.baseText}>{valuefrom}</Text>
           <Text style={styles.baseText}>Type of Pet</Text>
           <Picker selectedValue={pet} onValueChange={(pet) => setPet(pet)}>
             <Picker.Item label="Dog" value="Dog" />
@@ -162,11 +213,8 @@ const App = ({ navigation }) => {
               });
             }}
           />
-          <Button
-            onpress={() => {
-              readdata();
-            }}
-          />
+
+          <Button title={"testfirebase"} onPress={writeData} />
         </View>
       </View>
     </ImageBackground>
