@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 
+
 function SignInScreen({ navigation }) {
     const orientation = useDeviceOrientation();
 
@@ -16,10 +17,10 @@ function SignInScreen({ navigation }) {
             <View>
                 <Text style={[styles.heading, {marginTop: orientation.landscape ? 10 : "50%" }]}>Pet Patrol</Text>
                 
-                <TextInput style={styles.username} placeholder='username' onSubmitEditing={Keyboard.dismiss}/>
-                <TextInput style={styles.password} placeholder='password' onSubmitEditing={Keyboard.dismiss}/>
-                <Button title="Submit" onPress={() => navigation.navigate('Feed')} />
-                <Button title="Sign-up" />
+                <TextInput style={styles.username} placeholder='Username' onSubmitEditing={Keyboard.dismiss}/>
+                <TextInput style={styles.password} placeholder='Password' onSubmitEditing={Keyboard.dismiss}/>
+                <Button title="Submit"  onPress={() => navigation.navigate('Feed')} />
+                <Button title="Sign-In" onPress={() => navigation.navigate('SignUpScreen')} />
             </View>
             
         </ImageBackground>
@@ -28,6 +29,10 @@ function SignInScreen({ navigation }) {
 
 function submitFunc(){
     return Feed
+}
+
+function signin(){
+    return SignUpScreen
 }
 
 const styles = StyleSheet.create({
@@ -42,19 +47,20 @@ const styles = StyleSheet.create({
         textAlign: "center",
         fontWeight: "bold"
     },
-    password:{
-        marginTop: 55,
+    
+    username: {
+        marginTop: 50,
         padding: 10,
         borderWidth: 0.5,
         borderRadius: 2,
         backgroundColor: "#fff",
         width: "65%",
-        //display: "flex",
+       // display: "block",
         marginRight: "auto",
         marginLeft: "auto"
     },
-    
-    username: {
+
+    password: {
         marginTop: 50,
         padding: 10,
         borderWidth: 0.5,
