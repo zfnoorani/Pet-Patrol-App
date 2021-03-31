@@ -6,7 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 
-function SignUpScreen({ navigation }) {
+function SignUpNewScreen({ navigation }) {
     const orientation = useDeviceOrientation();
 
     return (
@@ -58,4 +58,4 @@ const styles = StyleSheet.create({
         marginLeft: "auto"
     }
 });
-export default SignUpScreen;
+export default SignUpNewScreen;
