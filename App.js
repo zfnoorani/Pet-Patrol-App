@@ -19,11 +19,7 @@ function App() {
   return (
     <NavigationContainer>
  
-<<<<<<< HEAD
-    <Stack.Navigator initialRouteName="LostForm" >
-=======
     <Stack.Navigator initialRouteName="SignInScreen" >
->>>>>>> signinstuff
     <Stack.Screen name="Feed" component={Feed} options={{title: 'Feed'}} />
     <Stack.Screen name="Flyer" component={Flyer} options={{title: 'Flyer'}} />
     <Stack.Screen name="MenuScreen" component={MenuScreen} options={{title: 'MenuScreen'}} />
