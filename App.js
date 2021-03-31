@@ -6,7 +6,6 @@ import SignInScreen from './Apps/screens/SignInScreen';
 import Flyer from './Apps/screens/Flyer';
 import FoundPost from './Apps/screens/FoundPost';
 import Feed from './Apps/screens/Feed';
-import SignUpNewScreen from './Apps/screens/SignUpNewScreen'
 import MenuScreen from './Apps/screens/MenuScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -18,7 +17,7 @@ function App() {
   return (
     <NavigationContainer>
  
-    <Stack.Navigator initialRouteName="LostForm" >
+    <Stack.Navigator initialRouteName="SignInScreen" >
     <Stack.Screen name="Feed" component={Feed} options={{title: 'Feed'}} />
     <Stack.Screen name="Flyer" component={Flyer} options={{title: 'Flyer'}} />
     <Stack.Screen name="MenuScreen" component={MenuScreen} options={{title: 'MenuScreen'}} />

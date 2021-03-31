@@ -2,7 +2,7 @@ import React from 'react';
 import {ImageBackground, StyleSheet, Text, View, TextInput, Keyboard, Button, script} from "react-native";
 import {useDimensions, useDeviceOrientation} from '@react-native-community/hooks';
 import Feed from './Feed'
-import SignUpNewScreen from './SignUpNewScreen'
+import SignUpScreen from './SignUpScreen'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
