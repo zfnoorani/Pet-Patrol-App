@@ -1,25 +1,28 @@
 import React from 'react';
 import {TouchableOpacity, ImageBackground, StyleSheet, Text, View, TextInput, Keyboard, Button} from "react-native";
+import {Picker} from '@react-native-picker/picker';
 
-function MenuScreen(props) {
+const MenuScreen = ({navigation}) => {
+
+
     return (
         <ImageBackground 
         style={styles.background} 
         source={require('../assets/pawprints.jpg')}>
             <Text style={styles.menu}>Menu</Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => { navigation.navigate('Feed');}}>
                     <Text style={styles.button}>
                         Feed
                     </Text>
                 </TouchableOpacity>
                 <Text />
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => { navigation.navigate('LostForm');}}>
                     <Text style={styles.button}>
                         Lost Posts
                     </Text>
                 </TouchableOpacity>
                 <Text />
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => { navigation.navigate('FoundPost');}}>
                     <Text style={styles.button}>
                         Found Posts
                     </Text>
@@ -33,8 +36,8 @@ function MenuScreen(props) {
         
         </ImageBackground>  
     );
-}
 
+                    }
 const styles = StyleSheet.create({
     background: {
         flex: 1,
