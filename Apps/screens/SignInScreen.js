@@ -3,8 +3,8 @@ import {ImageBackground, StyleSheet, Text, View, TextInput, Keyboard, Button, sc
 import {useDimensions, useDeviceOrientation} from '@react-native-community/hooks';
 import Feed from './Feed'
 import SignUpNewScreen from './SignUpNewScreen'
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+//import { NavigationContainer } from '@react-navigation/native';
+//import { createStackNavigator } from '@react-navigation/stack';
 
 
 
@@ -21,7 +21,7 @@ function SignInScreen({ navigation }) {
                 <TextInput style={styles.username} placeholder='Username' onSubmitEditing={Keyboard.dismiss}/>
                 <TextInput style={styles.password} placeholder='Password' onSubmitEditing={Keyboard.dismiss}/>
                 <Button title="Submit"  onPress={() => navigation.navigate('MenuScreen')} />
-                <Button title="Sign-In" onPress={() => navigation.navigate('SignUpNewScreen')} />
+                <Button title="Sign-Up" onPress={() => navigation.navigate('SignUpNewScreen')} />
             </View>
             
         </ImageBackground>
@@ -32,9 +32,7 @@ function submitFunc(){
     return Feed
 }
 
-function signin(){
-    return SignUpScreen
-}
+
 
 const styles = StyleSheet.create({
     background: {
