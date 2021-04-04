@@ -65,14 +65,15 @@ function SignInScreen({ navigation }) {
           placeholder="Password"
           onSubmitEditing={Keyboard.dismiss}
         />
+        
         <Button
           title="Submit"
           //   onPress={() => navigation.navigate("MenuScreen")}
           onPress={() => onsubmit()}
         />
         <Button
-          title="Sign-In"
-          onPress={() => navigation.navigate("SignUpNewScreen")}
+          title="Sign-Up"
+          onPress={() => navigation.navigate("MockSignUp")}
         />
       </View>
     </ImageBackground>

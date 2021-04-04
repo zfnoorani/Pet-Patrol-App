@@ -8,7 +8,7 @@ import FoundPost from './Apps/screens/FoundPost';
 import Feed from './Apps/screens/Feed';
 import MenuScreen from './Apps/screens/MenuScreen';
 import SignUpNewScreen from './Apps/screens/SignUpNewScreen';
-import MockSignIn from './Apps/screens/MockSignIn';
+import MockSignUp from './Apps/screens/MenuScreen';
 
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -21,9 +21,9 @@ function App() {
   return (
     <NavigationContainer>
  
-    <Stack.Navigator initialRouteName="FoundPost" >
+    <Stack.Navigator initialRouteName="SignInScreen" >
     <Stack.Screen name="Feed" component={Feed} options={{title: 'Feed'}} />
-    <Stack.Screen name="MockSignIn" component={MockSignIn} options={{title: 'MockSignIn'}} />
+    <Stack.Screen name="MockSignUp" component={MockSignUp} options={{title: 'SignUp'}} />
 
     <Stack.Screen name="Flyer" component={Flyer} options={{title: 'Flyer'}} />
     <Stack.Screen name="MenuScreen" component={MenuScreen} options={{title: 'MenuScreen'}} />
