@@ -65,7 +65,7 @@ const App = ({ navigation }) => {
 
   const readdata = () => {
     // let arr = [
-    //   { name: "abeer", id: firestoreAutoId() },
+    //   { name: "george", id: firestoreAutoId() },
     //   { name: "zamin", id: firestoreAutoId() },
     // ];
     // console.log(arr);
@@ -82,33 +82,55 @@ const App = ({ navigation }) => {
     // console.log(carr);
     console.log("running");
     var starCountRef = database.ref("/users");
-    starCountRef.once("value", (snapshot) => {
+    
+    starCountRef.on("value", (snapshot) => {
       const data = snapshot.val();
-console.log(data)
-let carr = Object.keys(data).map((item) => {
-  return data[item];
-});
-console.log(carr)
+      //evertime the data in the database changes the effects are real time. 
+    console.log(data)
+    let carr = Object.keys(data).map((item) => {
+    return data[item];
+  });
+  console.log(carr)
       // setvaluefrom(data);
     });
   };
   useEffect(readdata, []);
   const writeData = () => {
-    // let arr = [
-    //   { name: "abeer", id: firestoreAutoId() },
-    //   { name: "zamin", id: firestoreAutoId() },
-    // ];
-    // console.log(arr);
-    // let obj = {};
-    // arr.map((item) => {
-    //   obj[item.id] = item;
-    // });
-let obj={
-  name:'ali',
-  id:'22'
-}
-    database.ref("users/50W4TUPzgtUdnLcNp3xY").set(obj);
+    let arr = [
+      { name: "Ironman", age: 12, id: firestoreAutoId() },
+      { name: "Google Boy", age: 102,id: firestoreAutoId() },
+    ];
+    console.log(arr);
+    let obj = {};
+    arr.map((item) => {
+      obj[item.id] = item;
+    });
+    console.log(obj)
+    //database.ref("users/50W4TUPzgtUdnLcNp3xY").set(obj);
+    
+
+  // let obj={
+  //   name:pet,
+  //   id:'22'
+  // }
+   database.ref("users/Monstars").set(obj);
   };
+
+
+
+  // const writeData2 = () => {
+  //   let arr = [
+  //     { RandomNum: "75", id: firestoreAutoId() },
+  //     { RandomNum: "105", id: firestoreAutoId() },
+  //   ];
+  //   console.log(arr);
+  //   let obj = {};
+  //   arr.map((item) => {
+  //      obj[item.id] = item;
+
+  // });
+  // database.ref("users/50W4TUPzgtUdnLcNp3xY").set(obj);
+
   return (
     <ImageBackground
       style={styles.background}

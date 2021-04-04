@@ -25,13 +25,14 @@ const App = ({navigation}) => {
       style={styles.background} 
       source={require('../assets/pawprints.jpg')}>
       <View >
-        <Text >Find Pet Form </Text>
-        <View>
+      <Text style={[styles.heading]}>Pet Patrol Lost Form</Text>        <View>
           <TextInput 
+            style={styles.questions}
             placeholder="First Name"
             selectedValue={name}
             onChangeText={name => setName(name)} />
           <TextInput
+            style={styles.questions}
              placeholder="Last Name"
              selectedValue={lastName}
              onChangeText={lastName => setLastName(lastName)} />
@@ -40,6 +41,7 @@ const App = ({navigation}) => {
             Type of Pet
            </Text>
             <Picker
+            style={styles.questions}
             selectedValue={pet}
             onValueChange={pet => setPet(pet)}>
             <Picker.Item label="Dog" value="Dog" />
@@ -53,6 +55,7 @@ const App = ({navigation}) => {
             How long has it been missing. 
            </Text>
           <Picker
+            style={styles.questions}
             selectedValue= {time}
             onValueChange={time => setTime(time)}>
               <Picker.Item label = "<1 hr"></Picker.Item>
@@ -66,6 +69,7 @@ const App = ({navigation}) => {
             How Dangerous?
            </Text>
           <Picker
+          style={styles.questions}
           selectedValue= {danger}
             onValueChange={danger => setDanger(danger)}>
           <Picker.Item label = "Always Harmless"></Picker.Item>
@@ -80,6 +84,8 @@ const App = ({navigation}) => {
     
    
       <Picker
+        style={styles.questions}
+
           selectedValue={color}
           onValueChange={pet => setColor(pet)}>
         <Picker.Item label = "Black"></Picker.Item>
@@ -98,6 +104,7 @@ const App = ({navigation}) => {
    
             onPress={() => {
               navigation.navigate('Flyer', {
+                
                 name: name,
                 lastName: lastName,
                 itemName: pet,
@@ -123,6 +130,24 @@ const App = ({navigation}) => {
         flex: 1,
         resizeMode: 'contain'
         
+    },
+    heading: {
+        fontSize: 75,
+        paddingVertical: 15,
+        textAlign: "center",
+        fontWeight: "bold"
+    },
+    
+    questions: {
+        marginTop: 5,
+        padding: 10,
+        borderWidth: 0.5,
+        borderRadius: 2,
+        backgroundColor: "#fff",
+        width: "65%",
+       // display: "block",
+        marginRight: "auto",
+        marginLeft: "auto"
     }
   });
   

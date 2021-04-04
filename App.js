@@ -8,6 +8,8 @@ import FoundPost from './Apps/screens/FoundPost';
 import Feed from './Apps/screens/Feed';
 import MenuScreen from './Apps/screens/MenuScreen';
 import SignUpNewScreen from './Apps/screens/SignUpNewScreen';
+import MockSignIn from './Apps/screens/MockSignIn';
+
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -19,14 +21,16 @@ function App() {
   return (
     <NavigationContainer>
  
-    <Stack.Navigator initialRouteName="SignInScreen" >
+    <Stack.Navigator initialRouteName="LostForm" >
     <Stack.Screen name="Feed" component={Feed} options={{title: 'Feed'}} />
+    <Stack.Screen name="MockSignIn" component={MockSignIn} options={{title: 'MockSignIn'}} />
+
     <Stack.Screen name="Flyer" component={Flyer} options={{title: 'Flyer'}} />
     <Stack.Screen name="MenuScreen" component={MenuScreen} options={{title: 'MenuScreen'}} />
     <Stack.Screen name="FoundPost" component={FoundPost} options={{title: 'FoundPost'}} />
     <Stack.Screen name="SignUpNewScreen" component={SignUpNewScreen}  options={{title: 'SignUp'}} />
 
-    <Stack.Screen name="LostForm" component={LostForm}  options={{title: 'welcome'}} />
+    <Stack.Screen name="LostForm" component={LostForm}  options={{title: 'LostForm'}} />
     <Stack.Screen name="SignInScreen" component={SignInScreen} options={{title: 'SignIn'}} />
  
       
