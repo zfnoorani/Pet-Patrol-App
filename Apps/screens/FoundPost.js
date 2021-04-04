@@ -137,21 +137,25 @@ const App = ({ navigation }) => {
       source={require("../assets/pawprints.jpg")}
     >
       <View>
-        <Text>Find Pet Form </Text>
+        <Text style={styles.heading}>Found Pet Form </Text>
         <View>
           <TextInput
+            style={styles.questions}
             placeholder="First Name"
             selectedValue={name}
             onChangeText={(name) => setName(name)}
           />
           <TextInput
+                      style={styles.questions}
+
             placeholder="Last Name"
             selectedValue={lastName}
             onChangeText={(lastName) => setLastName(lastName)}
           />
           <Text style={styles.baseText}>{valuefrom}</Text>
-          <Text style={styles.baseText}>Type of Pet</Text>
-          <Picker selectedValue={pet} onValueChange={(pet) => setPet(pet)}>
+          <Text style={styles.heading2}>Type of Pet</Text>
+          <Picker             style={styles.questions}
+ selectedValue={pet} onValueChange={(pet) => setPet(pet)}>
             <Picker.Item label="Dog" value="Dog" />
             <Picker.Item label="Cat" value="Cat" />
             <Picker.Item label="Snake" value="Snake" />
@@ -159,13 +163,15 @@ const App = ({ navigation }) => {
             <Picker.Item label="Mouse" value="Mouse" />
             <Picker.Item label="NGN" value="Naira" />
           </Picker>
-          <Text style={styles.baseText}>When did you find it?</Text>
+          <Text style={styles.heading2}>When did you find it?</Text>
 
           <View>
-            <Button onPress={showDatepicker} title="Enter Date Pet was found" />
+            <Button             style={styles.questions}
+ onPress={showDatepicker} title="Enter Date Pet was found" />
           </View>
           <View>
-            <Button onPress={showTimepicker} title="Enter Time Pet was found" />
+            <Button             style={styles.questions}
+onPress={showTimepicker} title="Enter Time Pet was found" />
           </View>
           {show && (
             <DateTimePicker
@@ -178,8 +184,9 @@ const App = ({ navigation }) => {
             />
           )}
 
-          <Text style={styles.baseText}>How Dangerous was the pet?</Text>
-          <Picker
+          <Text style={styles.heading2}>How Dangerous was the pet?</Text>
+          <Picker            style={styles.questions}
+
             selectedValue={danger}
             onValueChange={(danger) => setDanger(danger)}
           >
@@ -188,9 +195,10 @@ const App = ({ navigation }) => {
             <Picker.Item label="Dangerous"></Picker.Item>
             <Picker.Item label="Very Dangerous"></Picker.Item>
           </Picker>
-          <Text style={styles.baseText}>What Color was the pet you found?</Text>
+          <Text style={styles.heading2}>What Color was the pet you found?</Text>
 
-          <Picker selectedValue={color} onValueChange={(pet) => setColor(pet)}>
+          <Picker             style={styles.questions}
+selectedValue={color} onValueChange={(pet) => setColor(pet)}>
             <Picker.Item label="Black"></Picker.Item>
             <Picker.Item label="Red"></Picker.Item>
             <Picker.Item label="Brown"></Picker.Item>
@@ -201,12 +209,15 @@ const App = ({ navigation }) => {
             <Picker.Item label="Other"></Picker.Item>
           </Picker>
           <TextInput
+                      style={styles.questions}
+
             placeholder="Breed"
             selectedValue={breed}
             onChangeText={(breed) => setBreed(breed)}
           />
           <TextInput
-            style={styles.textify}
+                      style={styles.questions}
+
             placeholder="What town did you find the pet in?"
             onSubmitEditing={Keyboard.dismiss}
             selectedValue={info}
@@ -214,7 +225,8 @@ const App = ({ navigation }) => {
           />
 
           <TextInput
-            style={styles.textify}
+                      style={styles.questions}
+
             placeholder="Additional Info"
             onSubmitEditing={Keyboard.dismiss}
             selectedValue={info}
@@ -244,8 +256,39 @@ const App = ({ navigation }) => {
 };
 const styles = StyleSheet.create({
   background: {
-    flex: 1,
-    resizeMode: "contain",
+      flex: 1,
+      resizeMode: 'contain'
+      
+  },
+  heading: {
+      fontSize: 75,
+      paddingVertical: 15,
+      textAlign: "center",
+      fontWeight: "bold"
+  },
+  heading2: {
+    fontSize: 20,
+    paddingVertical: 15,
+    textAlign: "center",
+    fontWeight: "bold"
+},
+  heading: {
+    fontSize: 75,
+    paddingVertical: 15,
+    textAlign: "center",
+    fontWeight: "bold"
+},
+  
+  questions: {
+      marginTop: 5,
+      padding: 10,
+      borderWidth: 0.5,
+      borderRadius: 2,
+      backgroundColor: "#fff",
+      width: "65%",
+     // display: "block",
+      marginRight: "auto",
+      marginLeft: "auto"
   },
 });
 

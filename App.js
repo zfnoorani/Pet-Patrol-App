@@ -21,7 +21,7 @@ function App() {
   return (
     <NavigationContainer>
  
-    <Stack.Navigator initialRouteName="LostForm" >
+    <Stack.Navigator initialRouteName="FoundPost" >
     <Stack.Screen name="Feed" component={Feed} options={{title: 'Feed'}} />
     <Stack.Screen name="MockSignIn" component={MockSignIn} options={{title: 'MockSignIn'}} />
 

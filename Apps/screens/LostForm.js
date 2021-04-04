@@ -3,8 +3,8 @@ import {Text, StyleSheet, View, TextInput, Button,ImageBackground, Keyboard} fro
 import {Picker} from '@react-native-picker/picker';
 
 const App = ({navigation}) => {
-    const [pet, setPet] = useState('Dog');
-    const [time, setTime] = useState('<1 hour');
+    const [pet, setPet] = useState('Cat');
+    const [time, setTime] = useState('<1 hdour');
     const [color, setColor] = useState('Black');
     const [name, setName] = useState('FirstName');
     const [lastName, setLastName] = useState('LastName');
@@ -37,7 +37,7 @@ const App = ({navigation}) => {
              selectedValue={lastName}
              onChangeText={lastName => setLastName(lastName)} />
           
-           <Text style={styles.baseText}>
+           <Text style={styles.heading2}>
             Type of Pet
            </Text>
             <Picker
@@ -51,7 +51,7 @@ const App = ({navigation}) => {
             <Picker.Item label="Mouse" value="Mouse" />
             <Picker.Item label="NGN" value="Naira" />
           </Picker>
-          <Text style={styles.baseText}>
+          <Text style={styles.heading2}>
             How long has it been missing. 
            </Text>
           <Picker
@@ -65,7 +65,7 @@ const App = ({navigation}) => {
               <Picker.Item label = "4 - 10 days"></Picker.Item>
               <Picker.Item label = "10+ days"></Picker.Item>
           </Picker>
-          <Text style={styles.baseText}>
+          <Text style={styles.heading2}>
             How Dangerous?
            </Text>
           <Picker
@@ -77,7 +77,7 @@ const App = ({navigation}) => {
           <Picker.Item label = "Less often than not harmless"></Picker.Item>
           <Picker.Item label = "You will be attacked"></Picker.Item>
       </Picker>
-      <Text style={styles.baseText}>
+      <Text style={styles.heading2}>
           What Color         
         </Text>
         
@@ -97,8 +97,9 @@ const App = ({navigation}) => {
         <Picker.Item label = "Blonde"></Picker.Item>
         <Picker.Item label = "Other"></Picker.Item>
       </Picker>
-      <TextInput placeholder='Breed' selectedValue={breed} onChangeText={breed => setBreed(breed)} />
-      <TextInput style={styles.textify} placeholder='Additional Info' onSubmitEditing={Keyboard.dismiss} selectedValue={info} onChangeText={info => setInfo(info)}/>
+      <TextInput         style={styles.questions}
+placeholder='Breed' selectedValue={breed} onChangeText={breed => setBreed(breed)} />
+      <TextInput style={styles.questions} placeholder='Additional Info' onSubmitEditing={Keyboard.dismiss} selectedValue={info} onChangeText={info => setInfo(info)}/>
         <Button
             title="Submit"
    
@@ -137,6 +138,18 @@ const App = ({navigation}) => {
         textAlign: "center",
         fontWeight: "bold"
     },
+    heading2: {
+      fontSize: 20,
+      paddingVertical: 15,
+      textAlign: "center",
+      fontWeight: "bold"
+  },
+    heading: {
+      fontSize: 75,
+      paddingVertical: 15,
+      textAlign: "center",
+      fontWeight: "bold"
+  },
     
     questions: {
         marginTop: 5,
