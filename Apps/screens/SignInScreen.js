@@ -24,23 +24,7 @@ function SignInScreen({ navigation, ...props }) {
   const orientation = useDeviceOrientation();
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
-  // const onsubmit = () => {
-  //     //let email='abeerahmad204@gmail.com';
-  //     //let password='asdf124'
-  //   auth
-  //     .signInWithEmailAndPassword(email, password)
-  //     .then((userCredential) => {
-  //       // Signed in
-  //       var user = userCredential.user;
-  //       console.log(user);
-  //       // ...
-  //     })
-  //     .catch((error) => {
-  //       var errorCode = error.code;
-  //       var errorMessage = error.message;
-  //       console.log(errorMessage);
-  //     });
-  // };
+  
   console.log(props);
   const handleSignin = () => {
     auth
