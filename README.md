@@ -15,12 +15,11 @@
 
 ##  Authentication is as the following:
 *  Only uses email address and password(must be 6 characters long
-*  Need this: expo install `@react-native-async-storage/async-storage`
-
+*  Need this: `expo install @react-native-async-storage/async-storage`
 *  When signing up and one clicks "Sign Up" then and click back to the sign in screen
 *  Mock Username: user1@gmail.com
 *  Mock Password: user123
-
+___________________________________________________________________________________________
 
 
 
