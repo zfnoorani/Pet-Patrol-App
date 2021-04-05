@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   ImageBackground,
   StyleSheet,
@@ -16,21 +16,43 @@ import {
 import Feed from "./Feed";
 import SignUpNewScreen from "./SignUpNewScreen";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import { Assets, createStackNavigator } from "@react-navigation/stack";
 import { auth } from "../../fbconfig";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-function SignInScreen({ navigation }) {
+function SignInScreen({ navigation, ...props }) {
   const orientation = useDeviceOrientation();
-
-  const onsubmit = () => {
-      let email='abeerahmad204@gmail.com';
-      let password='asdf124'
+  const [username, setusername] = useState("");
+  const [password, setpassword] = useState("");
+  // const onsubmit = () => {
+  //     //let email='abeerahmad204@gmail.com';
+  //     //let password='asdf124'
+  //   auth
+  //     .signInWithEmailAndPassword(email, password)
+  //     .then((userCredential) => {
+  //       // Signed in
+  //       var user = userCredential.user;
+  //       console.log(user);
+  //       // ...
+  //     })
+  //     .catch((error) => {
+  //       var errorCode = error.code;
+  //       var errorMessage = error.message;
+  //       console.log(errorMessage);
+  //     });
+  // };
+  console.log(props);
+  const handleSignin = () => {
     auth
-      .signInWithEmailAndPassword(email, password)
+      .signInWithEmailAndPassword(username, password)
       .then((userCredential) => {
         // Signed in
         var user = userCredential.user;
+        AsyncStorage.setItem("user", JSON.stringify(user));
+
         console.log(user);
+        props.route.params.setSignin(true);
+
         // ...
       })
       .catch((error) => {
@@ -59,17 +81,21 @@ function SignInScreen({ navigation }) {
           style={styles.username}
           placeholder="Username"
           onSubmitEditing={Keyboard.dismiss}
+          onChange={(e) => setusername(e.target.value)}
         />
         <TextInput
           style={styles.password}
           placeholder="Password"
           onSubmitEditing={Keyboard.dismiss}
+          onChange={(e) => {
+            setpassword(e.target.value);
+          }}
         />
-        
+
         <Button
           title="Submit"
+          onPress={handleSignin}
           //   onPress={() => navigation.navigate("MenuScreen")}
-          onPress={() => onsubmit()}
         />
         <Button
           title="Sign-Up"

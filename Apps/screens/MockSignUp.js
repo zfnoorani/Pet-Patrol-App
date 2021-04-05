@@ -31,7 +31,7 @@ const App = ({ navigation }) => {
       source={require("../assets/pawprints.jpg")}
     >
       <View>
-        <Text style={[styles.heading]}>Pet Patrol</Text>
+        <Text style={[styles.heading]}>Sign-Up</Text>
 
         <TextInput
           style={styles.questions}
@@ -45,12 +45,7 @@ const App = ({ navigation }) => {
           onSubmitEditing={Keyboard.dismiss}
           onChangeText={(password) => setPassword(password)}
         />
-        <TextInput
-          style={styles.questions}
-          placeholder="Email"
-          onSubmitEditing={Keyboard.dismiss}
-          onChangeText={(username) => setUsername(username)}
-        />
+        
         {/* <TextInput style={styles.questions} placeholder='First Name' onSubmitEditing={Keyboard.dismiss} onChangeText = {this.handleFname} /> */}
         {/* <TextInput style={styles.questions} placeholder='Last Name' onSubmitEditing={Keyboard.dismiss}  onChangeText = {this.handleLname} />
                     <TextInput style={styles.questions} placeholder='City' onSubmitEditing={Keyboard.dismiss} onChangeText = {this.handleCity} />
@@ -62,10 +57,16 @@ const App = ({ navigation }) => {
             auth
               .createUserWithEmailAndPassword(username, password)
               .then((creden) => {
-                console.log(creden);
+                var user= creden.user;
+                console.log(user);
+              }).catch((error) => {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                console.log(errorMessage);
               })
-              .then(navigation.navigate("MenuScreen"))
           }
+          
+        
         />
       </View>
     </ImageBackground>
