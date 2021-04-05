@@ -52,7 +52,7 @@ const App = ({ navigation }) => {
                     <TextInput style={styles.questions} placeholder='State' onSubmitEditing={Keyboard.dismiss} onChangeText = {this.handleStateabv} /> */}
         {/* <Button title='Sign-Up' onPress = { () =>  { this.props.navigation.navigate('Feed')}}/> */}
         <Button
-          title="Auth"
+          title="Sign Up"
           onPress={() =>
             auth
               .createUserWithEmailAndPassword(username, password)

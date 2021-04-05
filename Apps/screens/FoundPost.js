@@ -133,7 +133,9 @@ const App = ({ navigation }) => {
       style={styles.background}
       source={require("../assets/pawprints.jpg")}
     >
+      
       <View>
+        
         <Text style={styles.heading}>Found Pet Form </Text>
         <View>
           <TextInput
@@ -256,6 +258,7 @@ const App = ({ navigation }) => {
           <Button title={"testfirebase"} onPress={writeData} />
         </View>
       </View>
+      
     </ImageBackground>
   );
 };
