@@ -11,6 +11,7 @@
 * The following libraries are used
   *  `expo install @react-native-picker`
   *  `expo install @react-native-community/datetimepicker`
+  *  `expo install @react-native-async-storage/async-storage`
 
 Install 
 npm install express
