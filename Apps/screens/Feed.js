@@ -10,14 +10,19 @@ import {
   Button,
 } from "react-native";
 
+
 function LostPets(props) {
+    
   return (
     <ImageBackground
       style={styles.background}
       source={require("../assets/pawprints.jpg")}
     >
       <Text style={styles.title}>Feed</Text>
-      <Button title={"logout"} onPress={props.route.params.logout} />
+      {/* <Button title={"logout"} onPress={props.route.params.logout} /> */}
+      
+      
+
       <ScrollView style={styles.postContainer}>
         <TouchableOpacity>
           <Text style={[styles.lostFoundTitle, styles.found]}>Found</Text>
@@ -103,7 +108,6 @@ function LostPets(props) {
     </ImageBackground>
   );
 }
-
 const styles = StyleSheet.create({
   background: {
     flex: 1,

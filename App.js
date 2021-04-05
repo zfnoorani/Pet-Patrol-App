@@ -9,6 +9,8 @@ import Feed from "./Apps/screens/Feed";
 import MenuScreen from "./Apps/screens/MenuScreen";
 import SignUpNewScreen from "./Apps/screens/SignUpNewScreen";
 import MockSignUp from "./Apps/screens/MockSignUp";
+import Logout from "./Apps/screens/Logout";
+
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -47,10 +49,21 @@ function App() {
       <Stack.Navigator initialRouteName="SignInScreen">
         {isSignin ? (
           <>
+           <Stack.Screen
+              name="MenuScreen"
+              component={MenuScreen}
+              options={{ title: "MenuScreen" }}
+            />
             <Stack.Screen
               name="Feed"
               component={Feed}
               options={{ title: "Feed" }}
+              // initialParams={{ logout }}
+            />
+             <Stack.Screen
+              name="Logout"
+              component={Logout}
+              options={{ title: "Logout" }}
               initialParams={{ logout }}
             />
             <Stack.Screen
@@ -58,11 +71,7 @@ function App() {
               component={Flyer}
               options={{ title: "Flyer" }}
             />
-            <Stack.Screen
-              name="MenuScreen"
-              component={MenuScreen}
-              options={{ title: "MenuScreen" }}
-            />
+           
             <Stack.Screen
               name="FoundPost"
               component={FoundPost}

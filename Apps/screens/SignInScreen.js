@@ -63,7 +63,7 @@ function SignInScreen({ navigation, ...props }) {
 
         <TextInput
           style={styles.username}
-          placeholder="Username"
+          placeholder="Email Address"
           onSubmitEditing={Keyboard.dismiss}
           onChange={(e) => setusername(e.target.value)}
         />
