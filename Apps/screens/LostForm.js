@@ -28,7 +28,7 @@ const App = ({ navigation }) => {
       source={require("../assets/pawprints.jpg")}
     >
       <View>
-        <Text style={[styles.heading]}>Pet Patrol Lost Form</Text>{" "}
+        <Text style={[styles.heading]}>Pet Patrol Lost Form</Text>
         <View>
           <TextInput
             style={styles.questions}

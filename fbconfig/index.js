@@ -1,5 +1,5 @@
 import firebase from "firebase/app";
-import "firebase/analytics";
+// import "firebase/analytics";
 import "firebase/database";
 import "firebase/storage";
 // Add the Firebase products that you want to use

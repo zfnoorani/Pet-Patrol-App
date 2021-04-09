@@ -19,12 +19,13 @@ import { NavigationContainer } from "@react-navigation/native";
 import { Assets, createStackNavigator } from "@react-navigation/stack";
 import { auth } from "../../fbconfig";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { ScrollView } from "react-native-gesture-handler";
 
 function SignInScreen({ navigation, ...props }) {
   const orientation = useDeviceOrientation();
-  const [username, setusername] = useState("");
+  const [username, setusername] = useState("asdasd");
   const [password, setpassword] = useState("");
-  
+
   console.log(props);
   const handleSignin = () => {
     auth
@@ -51,41 +52,45 @@ function SignInScreen({ navigation, ...props }) {
       style={styles.background}
       source={require("../assets/pawprints.jpg")}
     >
-      <View>
-        <Text
-          style={[
-            styles.heading,
-            { marginTop: orientation.landscape ? 10 : "50%" },
-          ]}
-        >
-          Pet Patrol
-        </Text>
+      <ScrollView>
+        <View>
+          <Text
+            style={[
+              styles.heading,
+              { marginTop: orientation.landscape ? 10 : "50%" },
+            ]}
+          >
+            Pet Patrol
+          </Text>
 
-        <TextInput
-          style={styles.username}
-          placeholder="Email Address"
-          onSubmitEditing={Keyboard.dismiss}
-          onChange={(e) => setusername(e.target.value)}
-        />
-        <TextInput
-          style={styles.password}
-          placeholder="Password"
-          onSubmitEditing={Keyboard.dismiss}
-          onChange={(e) => {
-            setpassword(e.target.value);
-          }}
-        />
+          <TextInput
+            style={styles.username}
+            placeholder="Email Address"
+            onSubmitEditing={Keyboard.dismiss}
+            onChangeText={(e) => {
+              setusername(e);
+            }}
+          />
+          <TextInput
+            style={styles.password}
+            placeholder="Password"
+            onSubmitEditing={Keyboard.dismiss}
+            onChangeText={(e) => {
+              setpassword(e);
+            }}
+          />
 
-        <Button
-          title="Submit"
-          onPress={handleSignin}
-          //   onPress={() => navigation.navigate("MenuScreen")}
-        />
-        <Button
-          title="Sign-Up"
-          onPress={() => navigation.navigate("MockSignUp")}
-        />
-      </View>
+          <Button
+            title="Submit"
+            onPress={handleSignin}
+            //   onPress={() => navigation.navigate("MenuScreen")}
+          />
+          <Button
+            title="Sign-Up"
+            onPress={() => navigation.navigate("MockSignUp")}
+          />
+        </View>
+      </ScrollView>
     </ImageBackground>
   );
 }
