@@ -33,9 +33,15 @@ const MenuScreen = ({navigation}) => {
                         Messages
                     </Text>
                 </TouchableOpacity>
+                <TouchableOpacity onPress={() => { navigation.navigate('Logout');}}>
+                    <Text style={styles.button}>
+                        Logout
+                    </Text>
+                </TouchableOpacity>
         
         </ImageBackground>  
     );
+    
 
                     }
 const styles = StyleSheet.create({
