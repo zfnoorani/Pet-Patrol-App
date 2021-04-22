@@ -7,11 +7,16 @@ import {
   Button,
   ImageBackground,
   Keyboard,
+  ScrollView,
+
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import { database } from "../../fbconfig";
+import { auth, database, firebase } from "../../fbconfig";
+import { fire } from "../../fbconfig";
+
 import { useEffect } from "react";
+import { firestoreAutoId } from "./idgenerator";
 
 const App = ({ navigation }) => {
   const [pet, setPet] = useState("Dog");
@@ -22,6 +27,8 @@ const App = ({ navigation }) => {
   const [danger, setDanger] = useState("Dangerous");
   const [breed, setBreed] = useState("Unknown");
   const [info, setInfo] = useState("Unknown");
+  const [town, setTown] = useState("Unknown");
+
   const [date, setDate] = useState(new Date(1598051730000));
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
@@ -36,17 +43,17 @@ const App = ({ navigation }) => {
     console.log(currentDate);
   };
 
-  const firestoreAutoId = () => {
-    const CHARS =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  // const firestoreAutoId = () => {
+  //   const CHARS =
+  //     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-    let autoId = "";
+  //   let autoId = "";
 
-    for (let i = 0; i < 20; i++) {
-      autoId += CHARS.charAt(Math.floor(Math.random() * CHARS.length));
-    }
-    return autoId;
-  };
+  //   for (let i = 0; i < 20; i++) {
+  //     autoId += CHARS.charAt(Math.floor(Math.random() * CHARS.length));
+  //   }
+  //   return autoId;
+  // };
 
   const showMode = (currentMode) => {
     setShow(true);
@@ -62,6 +69,51 @@ const App = ({ navigation }) => {
   };
 
   console.log(lastName);
+  console.log("Id=", auth.currentUser.uid);
+
+  //_________________________________FireBase
+  const writeFire = () => {
+    fire
+      .collection("muUsers")
+      .add({
+        first: name,
+        last: lastName,
+        pet: pet,
+        color: color,
+        breed: breed,
+        danger: danger,
+        info: info,
+        town: town,
+        userId: auth.currentUser.uid,
+        date: date.toDateString(),
+        time: date.toLocaleString(),
+        type: "found",
+      })
+      .then((docRef) => {
+        console.log("Document written with ID: ", docRef.id);
+
+        fire
+          .collection("Users")
+          .doc(auth.currentUser.uid)
+          .update({
+            posts: firebase.firestore.FieldValue.arrayUnion({
+              id: docRef.id,
+              type: "found",
+            }),
+          });
+      })
+      .catch((error) => {
+        console.error("Error adding document: ", error);
+      });
+  };
+  //_____________________________________________
+  
+  const nav= () => {
+    navigation.navigate("Feed")};
+
+  const combinedFunc= () => {
+    nav();
+  writeFire()};
 
   const readdata = () => {
     // let arr = [
@@ -133,9 +185,9 @@ const App = ({ navigation }) => {
       style={styles.background}
       source={require("../assets/pawprints.jpg")}
     >
-      
+            <ScrollView>
+
       <View>
-        
         <Text style={styles.heading}>Found Pet Form </Text>
         <View>
           <TextInput
@@ -162,7 +214,7 @@ const App = ({ navigation }) => {
             <Picker.Item label="Snake" value="Snake" />
             <Picker.Item label="Rabbit" value="Rabbit" />
             <Picker.Item label="Mouse" value="Mouse" />
-            <Picker.Item label="NGN" value="Naira" />
+            <Picker.Item label="Monkey" value="Monkey" />
           </Picker>
           <Text style={styles.heading2}>When did you find it?</Text>
 
@@ -191,7 +243,7 @@ const App = ({ navigation }) => {
             />
           )}
 
-          <Text style={styles.heading2}>How Dangerous was the pet?</Text>
+          <Text style={styles.heading2}>How Dangerous is the pet?</Text>
           <Picker
             style={styles.questions}
             selectedValue={danger}
@@ -207,7 +259,7 @@ const App = ({ navigation }) => {
           <Picker
             style={styles.questions}
             selectedValue={color}
-            onValueChange={(pet) => setColor(pet)}
+            onValueChange={(color) => setColor(color)}
           >
             <Picker.Item label="Black"></Picker.Item>
             <Picker.Item label="Red"></Picker.Item>
@@ -228,8 +280,8 @@ const App = ({ navigation }) => {
             style={styles.questions}
             placeholder="What town did you find the pet in?"
             onSubmitEditing={Keyboard.dismiss}
-            selectedValue={info}
-            onChangeText={(info) => setInfo(info)}
+            selectedValue={town}
+            onChangeText={(town) => setTown(town)}
           />
 
           <TextInput
@@ -240,7 +292,7 @@ const App = ({ navigation }) => {
             onChangeText={(info) => setInfo(info)}
           />
           <Button
-            title="Submit"
+            title="Review Found Post"
             onPress={() => {
               navigation.navigate("Flyer", {
                 name: name,
@@ -248,6 +300,7 @@ const App = ({ navigation }) => {
                 itemName: pet,
                 timeStamp: time,
                 colorName: color,
+                townName: town,
                 danger: danger,
                 breed: breed,
                 info: info,
@@ -255,10 +308,11 @@ const App = ({ navigation }) => {
             }}
           />
 
-          <Button title={"testfirebase"} onPress={writeData} />
+          <Button title={"Submit"} onPress={combinedFunc}  />
         </View>
       </View>
-      
+      </ScrollView>
+
     </ImageBackground>
   );
 };

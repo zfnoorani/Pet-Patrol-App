@@ -9,7 +9,7 @@ import {
   Keyboard,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
-import { auth } from "../../fbconfig";
+import { auth, fire } from "../../fbconfig";
 import { createStackNavigator } from "@react-navigation/stack";
 
 const App = ({ navigation }) => {
@@ -45,7 +45,7 @@ const App = ({ navigation }) => {
           onSubmitEditing={Keyboard.dismiss}
           onChangeText={(password) => setPassword(password)}
         />
-        
+
         {/* <TextInput style={styles.questions} placeholder='First Name' onSubmitEditing={Keyboard.dismiss} onChangeText = {this.handleFname} /> */}
         {/* <TextInput style={styles.questions} placeholder='Last Name' onSubmitEditing={Keyboard.dismiss}  onChangeText = {this.handleLname} />
                     <TextInput style={styles.questions} placeholder='City' onSubmitEditing={Keyboard.dismiss} onChangeText = {this.handleCity} />
@@ -57,16 +57,20 @@ const App = ({ navigation }) => {
             auth
               .createUserWithEmailAndPassword(username, password)
               .then((creden) => {
-                var user= creden.user;
+                var user = creden.user;
+
+                fire.collection("Users").doc(auth.currentUser.uid).set({
+                  name: "random",
+                  username: username,
+                });
                 console.log(user);
-              }).catch((error) => {
+              })
+              .catch((error) => {
                 var errorCode = error.code;
                 var errorMessage = error.message;
                 console.log(errorMessage);
               })
           }
-          
-        
         />
       </View>
     </ImageBackground>

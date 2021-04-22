@@ -7,7 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 const App = ({ route, navigation }) => {
   
  
-  const { name, lastName, itemName, timeStamp, colorName, danger, breed, info } = route.params;
+  const { name, lastName, itemName, timeStamp, colorName, danger, breed, info, townName } = route.params;
  
   
  
@@ -25,11 +25,14 @@ const App = ({ route, navigation }) => {
       <Text>Name: {JSON.stringify(name)}</Text>
       <Text>LastName: {JSON.stringify(lastName)}</Text>
       <Text>Pet: {JSON.stringify(itemName)}</Text>
-      <Text>Time: {JSON.stringify(timeStamp)}</Text>
+      {/* <Text>Time: {JSON.stringify(timeStamp)}</Text> */}
       <Text>Color: {JSON.stringify(colorName)}</Text>
       <Text>Dangerous Level: {JSON.stringify(danger)}</Text>
       <Text>Breed: {JSON.stringify(breed)}</Text>
+      <Text>Town: {JSON.stringify(townName)}</Text>
+
       <Text>Extra Info: {JSON.stringify(info)}</Text>
+
 
 
  

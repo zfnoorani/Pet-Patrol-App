@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import {
   TouchableOpacity,
   Image,
@@ -9,10 +10,21 @@ import {
   ScrollView,
   Button,
 } from "react-native";
-
+import { fire } from "../../fbconfig";
 
 function LostPets(props) {
-    
+  const [posts, setposts] = useState([]);
+  const fetchfeeds = () => {
+    fire.collection("muUsers").onSnapshot((doc) => {
+      let data = doc.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      console.log("Current data: ", data);
+
+      setposts(data);
+    });
+  };
+  useEffect(fetchfeeds, []);
+  
+
   return (
     <ImageBackground
       style={styles.background}
@@ -20,94 +32,143 @@ function LostPets(props) {
     >
       <Text style={styles.title}>Feed</Text>
       {/* <Button title={"logout"} onPress={props.route.params.logout} /> */}
-      
-      
 
-      <ScrollView style={styles.postContainer}>
-        <TouchableOpacity>
-          <Text style={[styles.lostFoundTitle, styles.found]}>Found</Text>
-          <View style={[styles.post, styles.found]}>
-            <View style={styles.lostFoundContainer}>
-              <Image
-                style={styles.icon}
-                source={require("../assets/doge.jpg")}
-              ></Image>
-            </View>
-            <View style={styles.descriptionContainer}>
-              <Text style={styles.name}>Doge</Text>
-              <Text style={styles.description}>Aurora, IL</Text>
-              <Text style={styles.description}>3 Days</Text>
-            </View>
-          </View>
-          <View style={styles.userTimestamp}>
-            <Text style={styles.username}>PetPatroller417</Text>
-            <Text style={styles.timestamp}>3/15/2021 8:30 PM</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text style={[styles.lostFoundTitle, styles.lost]}>Lost</Text>
-          <View style={[styles.post, styles.lost]}>
-            <View style={styles.lostFoundContainer}>
-              <Image
-                style={styles.icon}
-                source={require("../assets/cat1.jpg")}
-              ></Image>
-            </View>
-            <View style={styles.descriptionContainer}>
-              <Text style={styles.name}>Elmo</Text>
-              <Text style={styles.description}>Naperville, IL</Text>
-              <Text style={styles.description}>5 Days</Text>
-            </View>
-          </View>
-          <View style={styles.userTimestamp}>
-            <Text style={styles.username}>PuppyLover444</Text>
-            <Text style={styles.timestamp}>3/15/2021 6:30 PM</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text style={[styles.lostFoundTitle, styles.found]}>Found</Text>
-          <View style={[styles.post, styles.found]}>
-            <View style={styles.lostFoundContainer}>
-              <Image
-                style={styles.icon}
-                source={require("../assets/cat3.jpg")}
-              ></Image>
-            </View>
-            <View style={styles.descriptionContainer}>
-              <Text style={styles.name}>Ace</Text>
-              <Text style={styles.description}>Chicago, IL</Text>
-              <Text style={styles.description}>3 Hours</Text>
-            </View>
-          </View>
-          <View style={styles.userTimestamp}>
-            <Text style={styles.username}>CatLadyZee</Text>
-            <Text style={styles.timestamp}>3/28/2021 9:30 PM</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text style={[styles.lostFoundTitle, styles.lost]}>Lost</Text>
-          <View style={[styles.post, styles.lost]}>
-            <View style={styles.lostFoundContainer}>
-              <Image
-                style={styles.icon}
-                source={require("../assets/cat2.jpg")}
-              ></Image>
-            </View>
-            <View style={styles.descriptionContainer}>
-              <Text style={styles.name}>Elmo</Text>
-              <Text style={styles.description}>Schaumburg, IL</Text>
-              <Text style={styles.description}>7 days</Text>
-            </View>
-          </View>
-          <View style={styles.userTimestamp}>
-            <Text style={styles.username}>PeppaPig777</Text>
-            <Text style={styles.timestamp}>3/28/2021 10:30 PM</Text>
-          </View>
-        </TouchableOpacity>
+      <ScrollView>
+        {posts.map((item, i) => {
+          return (
+            <TouchableOpacity key={i}>
+              <Text
+                style={[
+                  styles.lostFoundTitle,
+                  { backgroundColor: item.type == "found" ? "green" : "red" },
+                ]}
+              >
+                {item.type}
+              </Text>
+              <View
+                style={[
+                  styles.post,
+                  { backgroundColor: item.type == "found" ? "green" : "red" },
+                ]}
+              >
+                <View style={styles.lostFoundContainer}>
+                  <Image
+                    style={styles.icon}
+                    source={require("../assets/allAnimal.jpg")}
+                  ></Image>
+                </View>
+                <View style={styles.descriptionContainer}>
+                  <View>
+                    <Text style={styles.name}>{item.color} {item.pet}</Text>
+                  </View>
+                  <View>
+                    <Text style={styles.description}>Danger Lev :{item.danger}</Text>
+                    <Text style={styles.description}>Breed :{item.breed}</Text>
+                    <Text style={styles.description}>Info :{item.info}</Text>
+                    <Text style={styles.description}>Location :{item.town}</Text>
+
+
+
+
+                  </View>
+                </View>
+              </View>
+              <View style={styles.userTimestamp}>
+                <Text style={styles.username}>
+                  {item.first} {item.last}
+                </Text>
+                {/* <Text style={styles.username}>{item.last}</Text> */}
+                <Text style={styles.timestamp}>{item.time}</Text>
+              </View>
+            </TouchableOpacity>
+          );
+        })}
       </ScrollView>
     </ImageBackground>
   );
 }
+// <ScrollView style={styles.postContainer}>
+//         <TouchableOpacity>
+//           <Text style={[styles.lostFoundTitle, styles.found]}>Found</Text>
+//           <View style={[styles.post, styles.found]}>
+//             <View style={styles.lostFoundContainer}>
+//               <Image
+//                 style={styles.icon}
+//                 source={require("../assets/doge.jpg")}
+//               ></Image>
+//             </View>
+//             <View style={styles.descriptionContainer}>
+//               <Text style={styles.name}>Doge</Text>
+//               <Text style={styles.description}>Aurora, IL</Text>
+//               <Text style={styles.description}>3 Days</Text>
+//             </View>
+//           </View>
+//           <View style={styles.userTimestamp}>
+//             <Text style={styles.username}>PetPatroller417</Text>
+//             <Text style={styles.timestamp}>3/15/2021 8:30 PM</Text>
+//           </View>
+//         </TouchableOpacity>
+//         <TouchableOpacity>
+//           <Text style={[styles.lostFoundTitle, styles.lost]}>Lost</Text>
+//           <View style={[styles.post, styles.lost]}>
+//             <View style={styles.lostFoundContainer}>
+//               <Image
+//                 style={styles.icon}
+//                 source={require("../assets/cat1.jpg")}
+//               ></Image>
+//             </View>
+//             <View style={styles.descriptionContainer}>
+//               <Text style={styles.name}>Elmo</Text>
+//               <Text style={styles.description}>Naperville, IL</Text>
+//               <Text style={styles.description}>5 Days</Text>
+//             </View>
+//           </View>
+//           <View style={styles.userTimestamp}>
+//             <Text style={styles.username}>PuppyLover444</Text>
+//             <Text style={styles.timestamp}>3/15/2021 6:30 PM</Text>
+//           </View>
+//         </TouchableOpacity>
+//         <TouchableOpacity>
+//           <Text style={[styles.lostFoundTitle, styles.found]}>Found</Text>
+//           <View style={[styles.post, styles.found]}>
+//             <View style={styles.lostFoundContainer}>
+//               <Image
+//                 style={styles.icon}
+//                 source={require("../assets/cat3.jpg")}
+//               ></Image>
+//             </View>
+//             <View style={styles.descriptionContainer}>
+//               <Text style={styles.name}>Ace</Text>
+//               <Text style={styles.description}>Chicago, IL</Text>
+//               <Text style={styles.description}>3 Hours</Text>
+//             </View>
+//           </View>
+//           <View style={styles.userTimestamp}>
+//             <Text style={styles.username}>CatLadyZee</Text>
+//             <Text style={styles.timestamp}>3/28/2021 9:30 PM</Text>
+//           </View>
+//         </TouchableOpacity>
+//         <TouchableOpacity>
+//           <Text style={[styles.lostFoundTitle, styles.lost]}>Lost</Text>
+//           <View style={[styles.post, styles.lost]}>
+//             <View style={styles.lostFoundContainer}>
+//               <Image
+//                 style={styles.icon}
+//                 source={require("../assets/cat2.jpg")}
+//               ></Image>
+//             </View>
+//             <View style={styles.descriptionContainer}>
+//               <Text style={styles.name}>Elmo</Text>
+//               <Text style={styles.description}>Schaumburg, IL</Text>
+//               <Text style={styles.description}>7 days</Text>
+//             </View>
+//           </View>
+//           <View style={styles.userTimestamp}>
+//             <Text style={styles.username}>PeppaPig777</Text>
+//             <Text style={styles.timestamp}>3/28/2021 10:30 PM</Text>
+//           </View>
+//         </TouchableOpacity>
+//       </ScrollView>
 const styles = StyleSheet.create({
   background: {
     flex: 1,
@@ -123,13 +184,21 @@ const styles = StyleSheet.create({
   },
 
   description: {
-    fontSize: 20,
+    padding: 10,
+    color: "grey",
+    fontSize: 15,
+    fontWeight: "bold",
+
   },
 
   descriptionContainer: {
-    padding: 10,
-    flexDirection: "column",
-    justifyContent: "center",
+    padding: 20,
+    flexDirection: "row",
+    fontWeight: "bold",
+    alignItems: "center",
+
+
+  
   },
 
   icon: {
@@ -206,6 +275,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 10,
     paddingLeft: 10,
+  },
+  username2: {
+    fontWeight: "bold",
+    fontSize: 10,
+    paddingLeft: 15,
   },
 
   timestamp: {
