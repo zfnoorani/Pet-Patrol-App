@@ -10,9 +10,8 @@ import {
   Button,
 } from "react-native";
 
-
+//Logs out of Pet Patrol App.
 function logout(props) {
-    
   return (
     <ImageBackground
       style={styles.background}
@@ -20,10 +19,12 @@ function logout(props) {
     >
       <Text style={styles.title}>Log out of Pet Patrol</Text>
       <Button title={"Logout"} onPress={props.route.params.logout} />
-      
-      
-
-     
+      {/* This is the code on the App.js page. As seen we have the initialParams logout:
+           <Stack.Screen
+              name="Logout"
+              component={Logout}
+              options={{ title: "Logout" }}
+              initialParams={{ logout }} */}
     </ImageBackground>
   );
 }

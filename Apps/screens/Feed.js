@@ -15,24 +15,29 @@ import { fire } from "../../fbconfig";
 function LostPets(props) {
   const [posts, setposts] = useState([]);
   const fetchfeeds = () => {
-    fire.collection("muUsers").onSnapshot((doc) => {
+    // MyUsers is a collection in Firebase
+    fire.collection("muUsers").onSnapshot((doc) => { //https://firebase.google.com/docs/firestore/query-data/listen
       let data = doc.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-      console.log("Current data: ", data);
 
+      console.log("Current data: ", data);
+      //This is what the data looks like:
+      // 1: {id: "HjzD58sya7bK1nVu5Ojt", breed: "Jumbo Dog", color: "White", town: "Kang City", time: "8/21/2020, 6:15:30 PM", …}
+      // 2: {id: "X4zqaEWSwDRa1mCYV4AQ", date: "Fri Aug 21 2020", breed: "Weirdo", userId: "PhWLliUxloeIxUzSSzk7d67jMJj1", pet: "Rabbit", …}
+      // 3: {id: "YtTwMoO4DyRMZIB3q3zP", date: "Fri Aug 21 2020", color: "Black", last: "LastName", time: "Fri Aug 21 18:15:30 2020", …}
+      // 4: {id: "fZwucaTCPzCNnUDp0pFm", userId: "PhWLliUxloeIxUzSSzk7d67jMJj1", color: "Black", info: "None", last: "Lovepets", …}
+      // 5: {id: "k9u3xmKtn4SjMuLfEUoj", info: "None", breed: "Werpo", first: "Rex", last: "Happman", …}
+      // 6: {id: "tUr63RwhrAhYJQeVc6B0", first: "Horatio", pet: "Dog", type: "lost", time: "8/21/2020, 6:15:30 PM", …}
+      // 7: {id: "twtrKaiXL19jn7qVgqEP", last: "zxczxczx", danger: "Dangerous", pet: "Mouse", type: "found", …}
       setposts(data);
     });
   };
   useEffect(fetchfeeds, []);
-  
-
   return (
     <ImageBackground
       style={styles.background}
       source={require("../assets/pawprints.jpg")}
     >
       <Text style={styles.title}>Feed</Text>
-      {/* <Button title={"logout"} onPress={props.route.params.logout} /> */}
-
       <ScrollView>
         {posts.map((item, i) => {
           return (
@@ -40,7 +45,7 @@ function LostPets(props) {
               <Text
                 style={[
                   styles.lostFoundTitle,
-                  { backgroundColor: item.type == "found" ? "green" : "red" },
+                  { backgroundColor: item.type == "found" ? "green" : "red" }, // if found then greed, else red
                 ]}
               >
                 {item.type}
@@ -57,19 +62,22 @@ function LostPets(props) {
                     source={require("../assets/allAnimal.jpg")}
                   ></Image>
                 </View>
+
                 <View style={styles.descriptionContainer}>
                   <View>
-                    <Text style={styles.name}>{item.color} {item.pet}</Text>
+                    <Text style={styles.name}>
+                      {item.color} {item.pet}
+                    </Text>
                   </View>
                   <View>
-                    <Text style={styles.description}>Danger Lev :{item.danger}</Text>
+                    <Text style={styles.description}>
+                      Danger Lev :{item.danger}
+                    </Text>
                     <Text style={styles.description}>Breed :{item.breed}</Text>
                     <Text style={styles.description}>Info :{item.info}</Text>
-                    <Text style={styles.description}>Location :{item.town}</Text>
-
-
-
-
+                    <Text style={styles.description}>
+                      Location :{item.town}
+                    </Text>
                   </View>
                 </View>
               </View>
@@ -77,7 +85,6 @@ function LostPets(props) {
                 <Text style={styles.username}>
                   {item.first} {item.last}
                 </Text>
-                {/* <Text style={styles.username}>{item.last}</Text> */}
                 <Text style={styles.timestamp}>{item.time}</Text>
               </View>
             </TouchableOpacity>
@@ -87,88 +94,7 @@ function LostPets(props) {
     </ImageBackground>
   );
 }
-// <ScrollView style={styles.postContainer}>
-//         <TouchableOpacity>
-//           <Text style={[styles.lostFoundTitle, styles.found]}>Found</Text>
-//           <View style={[styles.post, styles.found]}>
-//             <View style={styles.lostFoundContainer}>
-//               <Image
-//                 style={styles.icon}
-//                 source={require("../assets/doge.jpg")}
-//               ></Image>
-//             </View>
-//             <View style={styles.descriptionContainer}>
-//               <Text style={styles.name}>Doge</Text>
-//               <Text style={styles.description}>Aurora, IL</Text>
-//               <Text style={styles.description}>3 Days</Text>
-//             </View>
-//           </View>
-//           <View style={styles.userTimestamp}>
-//             <Text style={styles.username}>PetPatroller417</Text>
-//             <Text style={styles.timestamp}>3/15/2021 8:30 PM</Text>
-//           </View>
-//         </TouchableOpacity>
-//         <TouchableOpacity>
-//           <Text style={[styles.lostFoundTitle, styles.lost]}>Lost</Text>
-//           <View style={[styles.post, styles.lost]}>
-//             <View style={styles.lostFoundContainer}>
-//               <Image
-//                 style={styles.icon}
-//                 source={require("../assets/cat1.jpg")}
-//               ></Image>
-//             </View>
-//             <View style={styles.descriptionContainer}>
-//               <Text style={styles.name}>Elmo</Text>
-//               <Text style={styles.description}>Naperville, IL</Text>
-//               <Text style={styles.description}>5 Days</Text>
-//             </View>
-//           </View>
-//           <View style={styles.userTimestamp}>
-//             <Text style={styles.username}>PuppyLover444</Text>
-//             <Text style={styles.timestamp}>3/15/2021 6:30 PM</Text>
-//           </View>
-//         </TouchableOpacity>
-//         <TouchableOpacity>
-//           <Text style={[styles.lostFoundTitle, styles.found]}>Found</Text>
-//           <View style={[styles.post, styles.found]}>
-//             <View style={styles.lostFoundContainer}>
-//               <Image
-//                 style={styles.icon}
-//                 source={require("../assets/cat3.jpg")}
-//               ></Image>
-//             </View>
-//             <View style={styles.descriptionContainer}>
-//               <Text style={styles.name}>Ace</Text>
-//               <Text style={styles.description}>Chicago, IL</Text>
-//               <Text style={styles.description}>3 Hours</Text>
-//             </View>
-//           </View>
-//           <View style={styles.userTimestamp}>
-//             <Text style={styles.username}>CatLadyZee</Text>
-//             <Text style={styles.timestamp}>3/28/2021 9:30 PM</Text>
-//           </View>
-//         </TouchableOpacity>
-//         <TouchableOpacity>
-//           <Text style={[styles.lostFoundTitle, styles.lost]}>Lost</Text>
-//           <View style={[styles.post, styles.lost]}>
-//             <View style={styles.lostFoundContainer}>
-//               <Image
-//                 style={styles.icon}
-//                 source={require("../assets/cat2.jpg")}
-//               ></Image>
-//             </View>
-//             <View style={styles.descriptionContainer}>
-//               <Text style={styles.name}>Elmo</Text>
-//               <Text style={styles.description}>Schaumburg, IL</Text>
-//               <Text style={styles.description}>7 days</Text>
-//             </View>
-//           </View>
-//           <View style={styles.userTimestamp}>
-//             <Text style={styles.username}>PeppaPig777</Text>
-//             <Text style={styles.timestamp}>3/28/2021 10:30 PM</Text>
-//           </View>
-//         </TouchableOpacity>
-//       </ScrollView>
+
 const styles = StyleSheet.create({
   background: {
     flex: 1,
@@ -185,20 +111,18 @@ const styles = StyleSheet.create({
 
   description: {
     padding: 10,
-    color: "grey",
-    fontSize: 15,
+    flexShrink:1,
+    color: "black",
+    fontSize: 8,
     fontWeight: "bold",
-
   },
 
   descriptionContainer: {
     padding: 20,
+
     flexDirection: "row",
     fontWeight: "bold",
     alignItems: "center",
-
-
-  
   },
 
   icon: {
@@ -208,7 +132,7 @@ const styles = StyleSheet.create({
   },
 
   name: {
-    fontSize: 30,
+    fontSize: 20,
     fontWeight: "bold",
   },
 

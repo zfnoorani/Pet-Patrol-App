@@ -1,11 +1,9 @@
 import firebase from "firebase/app";
-// import "firebase/analytics";
 import "firebase/database";
 import "firebase/storage";
 // Add the Firebase products that you want to use
 import "firebase/auth";
 import "firebase/firestore";
-//import firebase from "firebase/app";
 const firebaseConfig = {
   apiKey: "AIzaSyDiAg9hd1bojV49EZw90ZvapLWBo7JSF8I",
   authDomain: "petpatrol-5f189.firebaseapp.com",

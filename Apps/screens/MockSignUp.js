@@ -8,21 +8,13 @@ import {
   ImageBackground,
   Keyboard,
 } from "react-native";
-import { Picker } from "@react-native-picker/picker";
 import { auth, fire } from "../../fbconfig";
-import { createStackNavigator } from "@react-navigation/stack";
+
+//This file is a mock sign up but indeed it acts as an actual sign up.
 
 const App = ({ navigation }) => {
-  const [pet, setPet] = useState("Dog");
   const [username, setUsername] = useState("Null");
-
-  const [time, setTime] = useState("<1 hour");
-  const [color, setColor] = useState("Black");
-  const [name, setName] = useState("FirstName");
-  const [lastName, setLastName] = useState("LastName");
   const [password, setPassword] = useState("Null");
-  const [breed, setBreed] = useState("Unknown");
-  const [info, setInfo] = useState("Unknown");
   console.log(username);
 
   return (
@@ -45,20 +37,15 @@ const App = ({ navigation }) => {
           onSubmitEditing={Keyboard.dismiss}
           onChangeText={(password) => setPassword(password)}
         />
-
-        {/* <TextInput style={styles.questions} placeholder='First Name' onSubmitEditing={Keyboard.dismiss} onChangeText = {this.handleFname} /> */}
-        {/* <TextInput style={styles.questions} placeholder='Last Name' onSubmitEditing={Keyboard.dismiss}  onChangeText = {this.handleLname} />
-                    <TextInput style={styles.questions} placeholder='City' onSubmitEditing={Keyboard.dismiss} onChangeText = {this.handleCity} />
-                    <TextInput style={styles.questions} placeholder='State' onSubmitEditing={Keyboard.dismiss} onChangeText = {this.handleStateabv} /> */}
-        {/* <Button title='Sign-Up' onPress = { () =>  { this.props.navigation.navigate('Feed')}}/> */}
         <Button
           title="Sign Up"
           onPress={() =>
             auth
+              //Creating a new user with username and password
               .createUserWithEmailAndPassword(username, password)
               .then((creden) => {
                 var user = creden.user;
-
+                //The below "fire.collection("Users") is not need but is good to play around with a non-critical collection.
                 fire.collection("Users").doc(auth.currentUser.uid).set({
                   name: "random",
                   username: username,
@@ -95,7 +82,6 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     backgroundColor: "#fff",
     width: "65%",
-    // display: "block",
     marginRight: "auto",
     marginLeft: "auto",
   },
