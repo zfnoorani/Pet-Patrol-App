@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import LostForm from "./Apps/screens/LostForm";
@@ -7,11 +6,8 @@ import Flyer from "./Apps/screens/Flyer";
 import FoundPost from "./Apps/screens/FoundPost";
 import Feed from "./Apps/screens/Feed";
 import MenuScreen from "./Apps/screens/MenuScreen";
-import SignUpNewScreen from "./Apps/screens/SignUpNewScreen";
 import MockSignUp from "./Apps/screens/MockSignUp";
 import Logout from "./Apps/screens/Logout";
-
-
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useState } from "react";
@@ -23,9 +19,10 @@ const Stack = createStackNavigator();
 function App() {
   const [isSignin, setisSignin] = useState(false);
   useEffect(() => {
+    //We want to make sure a user that is signed in stays signed in, ASYNC helps with that. Now one can log in and refresh the page and walaa, he/she is still signed in.
     console.log("working");
     let call = async () => {
-    
+
       let user = await AsyncStorage.getItem("user");
       user = JSON.parse(user);
       console.log(user);
@@ -41,6 +38,7 @@ function App() {
     console.log(value);
   };
   const logout = () => {
+    //Signed out user
     AsyncStorage.removeItem("user");
     setisSignin(false);
   };
@@ -49,6 +47,7 @@ function App() {
       <Stack.Navigator initialRouteName="SignInScreen">
         {isSignin ? (
           <>
+          {/* Signed in User has access to the following pages:  */}
            <Stack.Screen
               name="MenuScreen"
               component={MenuScreen}
@@ -71,7 +70,7 @@ function App() {
               component={Flyer}
               options={{ title: "Flyer" }}
             />
-           
+
             <Stack.Screen
               name="FoundPost"
               component={FoundPost}
@@ -85,14 +84,13 @@ function App() {
           </>
         ) : (
           <>
+            {/* Signed out User has access to the following pages:  */}
+
             <Stack.Screen
               name="MockSignUp"
               component={MockSignUp}
               options={{ title: "SignUpScreen" }}
             />
-
-            {/* <Stack.Screen name="SignUpNewScreen" component={SignUpNewScreen}  options={{title: 'SignUp'}} /> */}
-
             <Stack.Screen
               name="SignInScreen"
               component={SignInScreen}
