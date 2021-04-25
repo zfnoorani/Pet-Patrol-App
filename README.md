@@ -12,6 +12,7 @@
   *  `expo install @react-native-picker`
   *  `expo install @react-native-community/datetimepicker`
   *  `expo install @react-native-async-storage/async-storage`
+  *  `expo install firebase`
 
 ##  Authentication is as the following:
 *  Only uses email address and password(must be 6 characters long
