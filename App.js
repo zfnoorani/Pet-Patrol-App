@@ -10,6 +10,8 @@ import MenuScreen from "./Apps/screens/MenuScreen";
 import SignUpNewScreen from "./Apps/screens/SignUpNewScreen";
 import MockSignUp from "./Apps/screens/MockSignUp";
 import Logout from "./Apps/screens/Logout";
+import Users from "./Apps/screens/ChatUsers";
+import ChatRoom from "./Apps/screens/ChatRoom";
 
 
 import { NavigationContainer } from "@react-navigation/native";
@@ -81,6 +83,16 @@ function App() {
               name="LostForm"
               component={LostForm}
               options={{ title: "LostForm" }}
+            />
+            <Stack.Screen
+              name="ChatUsers"
+              component={Users}
+              options={{ title: "ChatUsers" }}
+            />
+            <Stack.Screen
+              name="ChatRoom"
+              component={ChatRoom}
+              options={{ title: "ChatRoom" }}
             />
           </>
         ) : (

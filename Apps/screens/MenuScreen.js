@@ -1,9 +1,10 @@
 import React from 'react';
 import {TouchableOpacity, ImageBackground, StyleSheet, Text, View, TextInput, Keyboard, Button} from "react-native";
 import {Picker} from '@react-native-picker/picker';
+import { auth, fire, database } from "../../fbconfig";
+
 
 const MenuScreen = ({navigation}) => {
-
 
     return (
         <ImageBackground 
@@ -28,7 +29,31 @@ const MenuScreen = ({navigation}) => {
                     </Text>
                 </TouchableOpacity>
                 <Text />
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => {
+                    auth.onAuthStateChanged(function(user) {
+                        if (user) {
+                          // User is signed in.
+                          console.log(user)
+                          navigation.navigate('ChatUsers', {                
+                            name: user.displayName,                   
+                            email: user.email,             
+                            avatar: null,                    
+                            uid: user.uid,                
+                            username: user.displayName,         
+                            uemail: user.email
+                        })
+                        } else {
+                          // No user is signed in.
+                        }
+                      });
+                    /*navigation.navigate('ChatUsers', {                
+                        name: "datboi",                   
+                        email: "datboi@gmail.com",             
+                        avatar: null,                    
+                        uid:"IXcZLwjsynZi0wwzbZzhy85kPL42",                
+                        username:"datboi",         
+                        uemail:"datboi@gmail.com"
+                    })*/}}>
                     <Text style={styles.button}>
                         Messages
                     </Text>

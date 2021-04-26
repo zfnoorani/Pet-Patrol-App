@@ -15,6 +15,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 const App = ({ navigation }) => {
   const [pet, setPet] = useState("Dog");
   const [username, setUsername] = useState("Null");
+  const [email, setEmail] = useState("default@gmail.com")
 
   const [time, setTime] = useState("<1 hour");
   const [color, setColor] = useState("Black");
@@ -32,12 +33,17 @@ const App = ({ navigation }) => {
     >
       <View>
         <Text style={[styles.heading]}>Sign-Up</Text>
-
+        <TextInput
+          style={styles.questions}
+          placeholder="Username"
+          onSubmitEditing={Keyboard.dismiss}
+          onChangeText={(username) => setUsername(username)}
+        />
         <TextInput
           style={styles.questions}
           placeholder="Email"
           onSubmitEditing={Keyboard.dismiss}
-          onChangeText={(username) => setUsername(username)}
+          onChangeText={(email) => setEmail(email)}
         />
         <TextInput
           style={styles.questions}
@@ -52,23 +58,27 @@ const App = ({ navigation }) => {
                     <TextInput style={styles.questions} placeholder='State' onSubmitEditing={Keyboard.dismiss} onChangeText = {this.handleStateabv} /> */}
         {/* <Button title='Sign-Up' onPress = { () =>  { this.props.navigation.navigate('Feed')}}/> */}
         <Button
-          title="Sign Up"
+          title="Sign-Up"
           onPress={() =>
             auth
-              .createUserWithEmailAndPassword(username, password)
+              .createUserWithEmailAndPassword(email, password)
               .then((creden) => {
                 var user = creden.user;
+                user.updateProfile({ displayName: username})
 
                 fire.collection("Users").doc(auth.currentUser.uid).set({
-                  name: "random",
                   username: username,
+                  email: email,
+                  uid: auth.currentUser.uid
                 });
                 console.log(user);
+                alert("User " + username + " was created successfully!")
               })
               .catch((error) => {
                 var errorCode = error.code;
                 var errorMessage = error.message;
                 console.log(errorMessage);
+                alert("Error creating user " + username)
               })
           }
         />
