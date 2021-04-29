@@ -58,14 +58,14 @@ const App = ({ navigation }) => {
     setShow(true);
     setMode(currentMode);
   };
+  //This can be used for another implementation(Below)
+  // const showDatepicker = () => {
+  //   showMode("date");
+  // };
 
-  const showDatepicker = () => {
-    showMode("date");
-  };
-
-  const showTimepicker = () => {
-    showMode("time");
-  };
+  // const showTimepicker = () => {
+  //   showMode("time");
+  // };
 
   console.log(lastName);
   console.log("Id=", auth.currentUser.uid);
@@ -84,8 +84,8 @@ const App = ({ navigation }) => {
         info: info,
         town: town,
         userId: auth.currentUser.uid,
-        date: date.toDateString(),
-        time: date.toLocaleString(),
+        //date: date,//.toDateString(),
+        time: date,//.toLocaleString(),
         type: "lost",
       })
       .then((docRef) => {
@@ -152,9 +152,15 @@ const App = ({ navigation }) => {
               <Picker.Item label="Mouse" value="Mouse" />
               <Picker.Item label="Monkey" value="Monkey" />
             </Picker>
-            <Text style={styles.heading2}>When did you find it?</Text>
+            <Text style={styles.heading2}>When did you lose your pet?</Text>
+            <TextInput
+              style={styles.questions}
+              placeholder="When exactly did you lose your pet"
+              selectedValue={date}
+              onChangeText={(date) => setDate(date)}
+            />
 
-            <View>
+            {/*Another implementation if so desired <View>
               <Button
                 style={styles.questions}
                 onPress={showDatepicker}
@@ -177,7 +183,7 @@ const App = ({ navigation }) => {
                 display="default"
                 onChange={onChange}
               />
-            )}
+            )} */}
 
             <Text style={styles.heading2}>How Dangerous is the pet?</Text>
             <Picker

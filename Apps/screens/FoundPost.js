@@ -28,7 +28,7 @@ const App = ({ navigation }) => {
   const [info, setInfo] = useState("Unknown");
   const [town, setTown] = useState("Unknown");
 
-  const [date, setDate] = useState(new Date(1598051730000));
+  const [date, setDate] = useState("Today");
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
   const [valuefrom, setvaluefrom] = useState("");
@@ -71,8 +71,8 @@ const App = ({ navigation }) => {
         info: info,
         town: town,
         userId: auth.currentUser.uid,
-        date: date.toDateString(),
-        time: date.toLocaleString(),
+        //date: date,//.toDateString(),
+        time: date,//.toLocaleString(),
         type: "found",
       })
       .then((docRef) => {
@@ -140,8 +140,15 @@ const App = ({ navigation }) => {
               <Picker.Item label="Monkey" value="Monkey" />
             </Picker>
             <Text style={styles.heading2}>When did you find it?</Text>
+            <TextInput
+              style={styles.questions}
+              placeholder="When exactly did you find this pet"
+              selectedValue={date}
+              onChangeText={(date) => setDate(date)}
+            />
 
-            <View>
+            {/*Following is another way to implement data if need be:
+             <View>
               <Button
                 style={styles.questions}
                 onPress={showDatepicker}
@@ -164,7 +171,7 @@ const App = ({ navigation }) => {
                 display="default"
                 onChange={onChange}
               />
-            )}
+            )} */}
 
             <Text style={styles.heading2}>How Dangerous is the pet?</Text>
             <Picker
