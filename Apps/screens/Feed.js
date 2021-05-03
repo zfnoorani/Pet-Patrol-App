@@ -38,6 +38,7 @@ function LostPets(props) {
       source={require("../assets/pawprints.jpg")}
     >
       <Text style={styles.title}>Feed</Text>
+      {/* <Button title={"logout"} onPress={props.route.params.logout} /> */}
       <ScrollView>
         {posts.map((item, i) => {
           return (
@@ -75,6 +76,7 @@ function LostPets(props) {
                     </Text>
                     <Text style={styles.description}>Breed :{item.breed}</Text>
                     <Text style={styles.description}>Info :{item.info}</Text>
+
                     <Text style={styles.description}>
                       Location :{item.town}
                     </Text>
@@ -83,7 +85,7 @@ function LostPets(props) {
               </View>
               <View style={styles.userTimestamp}>
                 <Text style={styles.username}>
-                  {item.first} {item.last}
+                  {item.username}
                 </Text>
                 <Text style={styles.timestamp}>{item.time}</Text>
               </View>
@@ -106,7 +108,7 @@ const styles = StyleSheet.create({
     textAlign: "left",
     borderWidth: 4,
     padding: 10,
-    backgroundColor: "#4169e1",
+    backgroundColor: "#910606",
   },
 
   description: {
@@ -153,7 +155,7 @@ const styles = StyleSheet.create({
   },
 
   lost: {
-    backgroundColor: "#f55b38",
+    backgroundColor: "#910606",
   },
 
   lostFoundContainer: {

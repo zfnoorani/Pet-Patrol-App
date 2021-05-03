@@ -62,8 +62,7 @@ const App = ({ navigation }) => {
     fire
       .collection("muUsers")
       .add({
-        first: name,
-        last: lastName,
+        username: auth.currentUser.displayName,
         pet: pet,
         color: color,
         breed: breed,
@@ -111,6 +110,7 @@ const App = ({ navigation }) => {
     >
       <ScrollView>
         <View>
+
           <Text style={styles.heading}>Found Pet Form </Text>
           <View>
             <TextInput
@@ -216,29 +216,29 @@ const App = ({ navigation }) => {
               onChangeText={(town) => setTown(town)}
             />
 
-            <TextInput
-              style={styles.questions}
-              placeholder="Additional Info"
-              onSubmitEditing={Keyboard.dismiss}
-              selectedValue={info}
-              onChangeText={(info) => setInfo(info)}
-            />
-            <Button
-              title="Review Found Post"
-              onPress={() => {
-                navigation.navigate("Flyer", {
-                  name: name,
-                  lastName: lastName,
-                  itemName: pet,
-                  timeStamp: time,
-                  colorName: color,
-                  townName: town,
-                  danger: danger,
-                  breed: breed,
-                  info: info,
-                });
-              }}
-            />
+          <TextInput
+            style={styles.questions}
+            placeholder="Additional Info"
+            onSubmitEditing={Keyboard.dismiss}
+            selectedValue={info}
+            onChangeText={(info) => setInfo(info)}
+          />
+          <Button
+            title="Review Found Post"
+            onPress={() => {
+              navigation.navigate("Flyer", {
+                username: auth.currentUser.displayName,
+                itemName: pet,
+                timeStamp: time,
+                colorName: color,
+                townName: town,
+                danger: danger,
+                breed: breed,
+                info: info,
+              });
+            }}
+          />
+
 
             <Button title={"Submit"} onPress={combinedFunc} />
           </View>

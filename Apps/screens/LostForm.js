@@ -75,8 +75,7 @@ const App = ({ navigation }) => {
     fire
       .collection("muUsers")
       .add({
-        first: name,
-        last: lastName,
+        username: auth.currentUser.displayName,
         pet: pet,
         color: color,
         breed: breed,
@@ -124,6 +123,7 @@ const App = ({ navigation }) => {
     >
       <ScrollView>
         <View>
+
           <Text style={styles.heading}>Lost Pet Form </Text>
           <View>
             <TextInput

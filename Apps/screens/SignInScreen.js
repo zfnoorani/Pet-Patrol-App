@@ -71,6 +71,7 @@ function SignInScreen({ navigation, ...props }) {
             style={styles.password}
             placeholder="Password"
             onSubmitEditing={Keyboard.dismiss}
+            secureTextEntry
             onChangeText={(e) => {
               setpassword(e);
             }}
