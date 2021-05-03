@@ -11,20 +11,20 @@ import {
 } from "react-native";
 
 const App = ({ route, navigation }) => {
-  
- 
+
+
   const { username, lastName, itemName, timeStamp, colorName, danger, breed, info, townName } = route.params;
- 
-  
- 
- 
- 
- 
-  
- 
+
+
+
+
+
+
+
+
   return (
     <ImageBackground
-    style={styles.background} 
+    style={styles.background}
     source={require('../assets/icon.png')}>
     <View >
     <Text>Here is your flyer!</Text>
@@ -36,7 +36,7 @@ const App = ({ route, navigation }) => {
       <Text>Breed: {JSON.stringify(breed)}</Text>
       <Text>Town: {JSON.stringify(townName)}</Text>
 
-      <Text>Extra Info: {JSON.stringify(info)}</Text>
+
 
 
         <Text>Extra Info: {JSON.stringify(info)}</Text>
