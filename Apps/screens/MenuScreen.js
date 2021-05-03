@@ -86,10 +86,10 @@ const styles = StyleSheet.create({
         paddingBottom: 100,
     },
 
-    view: {
-        backgroundColor: '#00bfff',
-        flex: 1,
-    }
-})
+  view: {
+    backgroundColor: "#00bfff",
+    flex: 1,
+  },
+});
 
 export default MenuScreen;

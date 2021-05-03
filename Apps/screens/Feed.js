@@ -15,16 +15,23 @@ import { fire } from "../../fbconfig";
 function LostPets(props) {
   const [posts, setposts] = useState([]);
   const fetchfeeds = () => {
-    fire.collection("muUsers").onSnapshot((doc) => {
+    // MyUsers is a collection in Firebase
+    fire.collection("muUsers").onSnapshot((doc) => { //https://firebase.google.com/docs/firestore/query-data/listen
       let data = doc.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-      console.log("Current data: ", data);
 
+      console.log("Current data: ", data);
+      //This is what the data looks like:
+      // 1: {id: "HjzD58sya7bK1nVu5Ojt", breed: "Jumbo Dog", color: "White", town: "Kang City", time: "8/21/2020, 6:15:30 PM", …}
+      // 2: {id: "X4zqaEWSwDRa1mCYV4AQ", date: "Fri Aug 21 2020", breed: "Weirdo", userId: "PhWLliUxloeIxUzSSzk7d67jMJj1", pet: "Rabbit", …}
+      // 3: {id: "YtTwMoO4DyRMZIB3q3zP", date: "Fri Aug 21 2020", color: "Black", last: "LastName", time: "Fri Aug 21 18:15:30 2020", …}
+      // 4: {id: "fZwucaTCPzCNnUDp0pFm", userId: "PhWLliUxloeIxUzSSzk7d67jMJj1", color: "Black", info: "None", last: "Lovepets", …}
+      // 5: {id: "k9u3xmKtn4SjMuLfEUoj", info: "None", breed: "Werpo", first: "Rex", last: "Happman", …}
+      // 6: {id: "tUr63RwhrAhYJQeVc6B0", first: "Horatio", pet: "Dog", type: "lost", time: "8/21/2020, 6:15:30 PM", …}
+      // 7: {id: "twtrKaiXL19jn7qVgqEP", last: "zxczxczx", danger: "Dangerous", pet: "Mouse", type: "found", …}
       setposts(data);
     });
   };
   useEffect(fetchfeeds, []);
-  
-
   return (
     <ImageBackground
       style={styles.background}
@@ -39,7 +46,7 @@ function LostPets(props) {
               <Text
                 style={[
                   styles.lostFoundTitle,
-                  { backgroundColor: item.type == "found" ? "green" : "red" },
+                  { backgroundColor: item.type == "found" ? "green" : "red" }, // if found then greed, else red
                 ]}
               >
                 {item.type}
@@ -56,15 +63,23 @@ function LostPets(props) {
                     source={require("../assets/allAnimal.jpg")}
                   ></Image>
                 </View>
+
                 <View style={styles.descriptionContainer}>
                   <View>
-                    <Text style={styles.name}>{item.color} {item.pet}</Text>
+                    <Text style={styles.name}>
+                      {item.color} {item.pet}
+                    </Text>
                   </View>
                   <View>
-                    <Text style={styles.description}>Danger Lev :{item.danger}</Text>
+                    <Text style={styles.description}>
+                      Danger Lev :{item.danger}
+                    </Text>
                     <Text style={styles.description}>Breed :{item.breed}</Text>
                     <Text style={styles.description}>Info :{item.info}</Text>
-                    <Text style={styles.description}>Location :{item.town}</Text>
+
+                    <Text style={styles.description}>
+                      Location :{item.town}
+                    </Text>
                   </View>
                 </View>
               </View>
@@ -72,7 +87,6 @@ function LostPets(props) {
                 <Text style={styles.username}>
                   {item.username}
                 </Text>
-                {/* <Text style={styles.username}>{item.last}</Text> */}
                 <Text style={styles.timestamp}>{item.time}</Text>
               </View>
             </TouchableOpacity>
@@ -83,7 +97,6 @@ function LostPets(props) {
   );
 }
 
-// Styling
 const styles = StyleSheet.create({
   background: {
     flex: 1,
@@ -100,14 +113,15 @@ const styles = StyleSheet.create({
 
   description: {
     padding: 10,
-    color: "grey",
-    fontSize: 15,
+    flexShrink:1,
+    color: "black",
+    fontSize: 8,
     fontWeight: "bold",
-
   },
 
   descriptionContainer: {
     padding: 20,
+
     flexDirection: "row",
     fontWeight: "bold",
     alignItems: "center",
@@ -120,7 +134,7 @@ const styles = StyleSheet.create({
   },
 
   name: {
-    fontSize: 30,
+    fontSize: 20,
     fontWeight: "bold",
   },
 

@@ -1,9 +1,15 @@
-import React, {useState, Component} from 'react';
- 
-import {Picker, Text, StyleSheet, View, TextInput, Button,ImageBackground} from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
- 
- 
+import React, { useState, Component } from "react";
+
+import {
+  Picker,
+  Text,
+  StyleSheet,
+  View,
+  TextInput,
+  Button,
+  ImageBackground,
+} from "react-native";
+
 const App = ({ route, navigation }) => {
   
  
@@ -33,23 +39,19 @@ const App = ({ route, navigation }) => {
       <Text>Extra Info: {JSON.stringify(info)}</Text>
 
 
+        <Text>Extra Info: {JSON.stringify(info)}</Text>
 
- 
-      <Text >Find Pet Form </Text>
-      <View>
-       
+        <Text>Find Pet Form </Text>
+        <View></View>
       </View>
-    </View>
     </ImageBackground>
- 
   );
 };
 const styles = StyleSheet.create({
   background: {
-      flex: 1,
-      resizeMode: 'contain'
-      
-  }
+    flex: 1,
+    resizeMode: "contain",
+  },
 });
- 
+
 export default App;

@@ -7,7 +7,6 @@ import {
   Button,
   ImageBackground,
   ScrollView,
-
   Keyboard,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
@@ -59,14 +58,14 @@ const App = ({ navigation }) => {
     setShow(true);
     setMode(currentMode);
   };
+  //This can be used for another implementation(Below)
+  // const showDatepicker = () => {
+  //   showMode("date");
+  // };
 
-  const showDatepicker = () => {
-    showMode("date");
-  };
-
-  const showTimepicker = () => {
-    showMode("time");
-  };
+  // const showTimepicker = () => {
+  //   showMode("time");
+  // };
 
   console.log(lastName);
   console.log("Id=", auth.currentUser.uid);
@@ -84,8 +83,8 @@ const App = ({ navigation }) => {
         info: info,
         town: town,
         userId: auth.currentUser.uid,
-        date: date.toDateString(),
-        time: date.toLocaleString(),
+        //date: date,//.toDateString(),
+        time: date,//.toLocaleString(),
         type: "lost",
       })
       .then((docRef) => {
@@ -106,201 +105,157 @@ const App = ({ navigation }) => {
       });
   };
   //_____________________________________________
-  
-  const nav= () => {
-    navigation.navigate("Feed")};
 
-  const combinedFunc= () => {
+  const nav = () => {
+    navigation.navigate("Feed");
+  };
+
+  const combinedFunc = () => {
     nav();
-  writeFire()};
-
-  const readdata = () => {
-    // let arr = [
-    //   { name: "george", id: firestoreAutoId() },
-    //   { name: "zamin", id: firestoreAutoId() },
-    // ];
-    // console.log(arr);
-    // let obj = {};
-    // arr.map((item) => {
-    //   obj[item.id] = item;
-    // });
-
-    // console.log(obj);
-
-    // let carr = Object.keys(obj).map((item) => {
-    //   return obj[item];
-    // });
-    // console.log(carr);
-    console.log("running");
-    var starCountRef = database.ref("/users");
-
-    starCountRef.on("value", (snapshot) => {
-      const data = snapshot.val();
-      //evertime the data in the database changes the effects are real time.
-      console.log(data);
-      let carr = Object.keys(data).map((item) => {
-        return data[item];
-      });
-      console.log(carr);
-      // setvaluefrom(data);
-    });
-  };
-  useEffect(readdata, []);
-  const writeData = () => {
-    let arr = [
-      { name: "Ironman", age: 12, id: firestoreAutoId() },
-      { name: "Google Boy", age: 102, id: firestoreAutoId() },
-    ];
-    console.log(arr);
-    let obj = {};
-    arr.map((item) => {
-      obj[item.id] = item;
-    });
-    console.log(obj);
-    //database.ref("users/50W4TUPzgtUdnLcNp3xY").set(obj);
-
-    // let obj={
-    //   name:pet,
-    //   id:'22'
-    // }
-    database.ref("users/Monstars").set(obj);
+    writeFire();
   };
 
-  // const writeData2 = () => {
-  //   let arr = [
-  //     { RandomNum: "75", id: firestoreAutoId() },
-  //     { RandomNum: "105", id: firestoreAutoId() },
-  //   ];
-  //   console.log(arr);
-  //   let obj = {};
-  //   arr.map((item) => {
-  //      obj[item.id] = item;
-
-  // });
-  // database.ref("users/50W4TUPzgtUdnLcNp3xY").set(obj);
 
   return (
     <ImageBackground
       style={styles.background}
       source={require("../assets/pawprints.jpg")}
     >
-   <ScrollView>
-
-      <View>
-
-        <Text style={styles.heading}>Lost Pet Form </Text>
+      <ScrollView>
         <View>
-          <Text style={styles.baseText}>{valuefrom}</Text>
-          <Text style={styles.heading2}>Type of Pet</Text>
-          <Picker
-            style={styles.questions}
-            selectedValue={pet}
-            onValueChange={(pet) => setPet(pet)}
-          >
-            <Picker.Item label="Dog" value="Dog" />
-            <Picker.Item label="Cat" value="Cat" />
-            <Picker.Item label="Snake" value="Snake" />
-            <Picker.Item label="Rabbit" value="Rabbit" />
-            <Picker.Item label="Mouse" value="Mouse" />
-            <Picker.Item label="Monkey" value="Monkey" />
-          </Picker>
-          <Text style={styles.heading2}>When did you find it?</Text>
 
+          <Text style={styles.heading}>Lost Pet Form </Text>
           <View>
-            <Button
+            <TextInput
               style={styles.questions}
-              onPress={showDatepicker}
-              title="Enter Date Pet was lost"
+              placeholder="First Name"
+              selectedValue={name}
+              onChangeText={(name) => setName(name)}
             />
-          </View>
-          <View>
-            <Button
+            <TextInput
               style={styles.questions}
-              onPress={showTimepicker}
-              title="Enter Time Pet was lost"
+              placeholder="Last Name"
+              selectedValue={lastName}
+              onChangeText={(lastName) => setLastName(lastName)}
             />
+            <Text style={styles.baseText}>{valuefrom}</Text>
+            <Text style={styles.heading2}>Type of Pet</Text>
+            <Picker
+              style={styles.questions}
+              selectedValue={pet}
+              onValueChange={(pet) => setPet(pet)}
+            >
+              <Picker.Item label="Dog" value="Dog" />
+              <Picker.Item label="Cat" value="Cat" />
+              <Picker.Item label="Snake" value="Snake" />
+              <Picker.Item label="Rabbit" value="Rabbit" />
+              <Picker.Item label="Mouse" value="Mouse" />
+              <Picker.Item label="Monkey" value="Monkey" />
+            </Picker>
+            <Text style={styles.heading2}>When did you lose your pet?</Text>
+            <TextInput
+              style={styles.questions}
+              placeholder="When exactly did you lose your pet"
+              selectedValue={date}
+              onChangeText={(date) => setDate(date)}
+            />
+
+            {/*Another implementation if so desired <View>
+              <Button
+                style={styles.questions}
+                onPress={showDatepicker}
+                title="Enter Date Pet was lost"
+              />
+            </View>
+            <View>
+              <Button
+                style={styles.questions}
+                onPress={showTimepicker}
+                title="Enter Time Pet was lost"
+              />
+            </View>
+            {show && (
+              <DateTimePicker
+                testID="dateTimePicker"
+                value={date}
+                mode={mode}
+                is24Hour={true}
+                display="default"
+                onChange={onChange}
+              />
+            )} */}
+
+            <Text style={styles.heading2}>How Dangerous is the pet?</Text>
+            <Picker
+              style={styles.questions}
+              selectedValue={danger}
+              onValueChange={(danger) => setDanger(danger)}
+            >
+              <Picker.Item label="Harmless"></Picker.Item>
+              <Picker.Item label="Mostly Harmless"></Picker.Item>
+              <Picker.Item label="Dangerous"></Picker.Item>
+              <Picker.Item label="Very Dangerous"></Picker.Item>
+            </Picker>
+            <Text style={styles.heading2}>
+              What Color was the pet you lost?
+            </Text>
+
+            <Picker
+              style={styles.questions}
+              selectedValue={color}
+              onValueChange={(color) => setColor(color)}
+            >
+              <Picker.Item label="Black"></Picker.Item>
+              <Picker.Item label="Red"></Picker.Item>
+              <Picker.Item label="Brown"></Picker.Item>
+              <Picker.Item label="White"></Picker.Item>
+              <Picker.Item label="Grey"></Picker.Item>
+              <Picker.Item label="Blue"></Picker.Item>
+              <Picker.Item label="Blonde"></Picker.Item>
+              <Picker.Item label="Other"></Picker.Item>
+            </Picker>
+            <TextInput
+              style={styles.questions}
+              placeholder="Breed"
+              selectedValue={breed}
+              onChangeText={(breed) => setBreed(breed)}
+            />
+            <TextInput
+              style={styles.questions}
+              placeholder="What town did you lose the pet in?"
+              onSubmitEditing={Keyboard.dismiss}
+              selectedValue={town}
+              onChangeText={(town) => setTown(town)}
+            />
+
+            <TextInput
+              style={styles.questions}
+              placeholder="Additional Info"
+              onSubmitEditing={Keyboard.dismiss}
+              selectedValue={info}
+              onChangeText={(info) => setInfo(info)}
+            />
+            <Button
+              title="Review Lost Form"
+              onPress={() => {
+                navigation.navigate("Flyer", {
+                  name: name,
+                  lastName: lastName,
+                  itemName: pet,
+                  timeStamp: time,
+                  colorName: color,
+                  danger: danger,
+                  breed: breed,
+                  townName: town,
+                  info: info,
+                });
+              }}
+            />
+
+            <Button title={"Submit"} onPress={combinedFunc} />
           </View>
-          {show && (
-            <DateTimePicker
-              testID="dateTimePicker"
-              value={date}
-              mode={mode}
-              is24Hour={true}
-              display="default"
-              onChange={onChange}
-            />
-          )}
-
-          <Text style={styles.heading2}>How Dangerous is the pet?</Text>
-          <Picker
-            style={styles.questions}
-            selectedValue={danger}
-            onValueChange={(danger) => setDanger(danger)}
-          >
-            <Picker.Item label="Harmless"></Picker.Item>
-            <Picker.Item label="Mostly Harmless"></Picker.Item>
-            <Picker.Item label="Dangerous"></Picker.Item>
-            <Picker.Item label="Very Dangerous"></Picker.Item>
-          </Picker>
-          <Text style={styles.heading2}>What Color was the pet you lost?</Text>
-
-          <Picker
-            style={styles.questions}
-            selectedValue={color}
-            onValueChange={(color) => setColor(color)}
-          >
-            <Picker.Item label="Black"></Picker.Item>
-            <Picker.Item label="Red"></Picker.Item>
-            <Picker.Item label="Brown"></Picker.Item>
-            <Picker.Item label="White"></Picker.Item>
-            <Picker.Item label="Grey"></Picker.Item>
-            <Picker.Item label="Blue"></Picker.Item>
-            <Picker.Item label="Blonde"></Picker.Item>
-            <Picker.Item label="Other"></Picker.Item>
-          </Picker>
-          <TextInput
-            style={styles.questions}
-            placeholder="Breed"
-            selectedValue={breed}
-            onChangeText={(breed) => setBreed(breed)}
-          />
-          <TextInput
-            style={styles.questions}
-            placeholder="What town did you lose the pet in?"
-            onSubmitEditing={Keyboard.dismiss}
-            selectedValue={town}
-            onChangeText={(town) => setTown(town)}
-          />
-
-          <TextInput
-            style={styles.questions}
-            placeholder="Additional Info"
-            onSubmitEditing={Keyboard.dismiss}
-            selectedValue={info}
-            onChangeText={(info) => setInfo(info)}
-          />
-          <Button
-            title="Review Lost Form"
-            onPress={() => {
-              navigation.navigate("Flyer", {
-                name: name,
-                lastName: lastName,
-                itemName: pet,
-                timeStamp: time,
-                colorName: color,
-                danger: danger,
-                breed: breed,
-                townName: town, 
-                info: info,
-              });
-            }}
-          />
-
-          <Button title={"Submit"} onPress={combinedFunc}  />
         </View>
-      </View>
       </ScrollView>
-
     </ImageBackground>
   );
 };
@@ -335,7 +290,6 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     backgroundColor: "#fff",
     width: "65%",
-    // display: "block",
     marginRight: "auto",
     marginLeft: "auto",
   },

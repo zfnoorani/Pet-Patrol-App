@@ -7,16 +7,11 @@ import {
   TextInput,
   Keyboard,
   Button,
-  script,
 } from "react-native";
 import {
-  useDimensions,
   useDeviceOrientation,
 } from "@react-native-community/hooks";
 import Feed from "./Feed";
-import SignUpNewScreen from "./SignUpNewScreen";
-import { NavigationContainer } from "@react-navigation/native";
-import { Assets, createStackNavigator } from "@react-navigation/stack";
 import { auth } from "../../fbconfig";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ScrollView } from "react-native-gesture-handler";
@@ -27,18 +22,19 @@ function SignInScreen({ navigation, ...props }) {
   const [password, setpassword] = useState("");
 
   console.log(props);
+
   const handleSignin = () => {
+    //Method to handle sign in...see below doc
+    //https://firebase.google.com/docs/auth/web/password-auth
     auth
       .signInWithEmailAndPassword(username, password)
       .then((userCredential) => {
         // Signed in
         var user = userCredential.user;
         AsyncStorage.setItem("user", JSON.stringify(user));
-
+        // https://reactnative.dev/docs/asyncstorage
         console.log(user);
         props.route.params.setSignin(true);
-
-        // ...
       })
       .catch((error) => {
         var errorCode = error.code;
@@ -80,11 +76,9 @@ function SignInScreen({ navigation, ...props }) {
               setpassword(e);
             }}
           />
-
           <Button
             title="Submit"
             onPress={handleSignin}
-            //   onPress={() => navigation.navigate("MenuScreen")}
           />
           <Button
             title="Sign-Up"
@@ -123,7 +117,6 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     backgroundColor: "#fff",
     width: "65%",
-    // display: "block",
     marginRight: "auto",
     marginLeft: "auto",
   },
@@ -135,7 +128,6 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     backgroundColor: "#fff",
     width: "65%",
-    // display: "block",
     marginRight: "auto",
     marginLeft: "auto",
   },
