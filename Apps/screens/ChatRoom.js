@@ -5,15 +5,11 @@ import {
   View,
   TouchableOpacity,
   Image,
-  Alert,
   ScrollView,
   Dimensions,
   TextInput,
-  FlatList,
-  Button,
-  AsyncStorage
+  ImageBackground,
 } from 'react-native';
-import firebaseSvc from '../../firebaseSDK'
 import { auth, fire, database } from "../../fbconfig";
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -21,6 +17,12 @@ const screenHeight = Math.round(Dimensions.get('window').height);
 export default class Chat extends Component {
   constructor(props) {
     super(props);
+    /* State Data:
+    f_id, f_name, f_email belong to the person the user is chatting to
+    u_id, u_name, u_email belong to the current user
+    text holds the input text
+    chatData holds all messages between these users
+    */
     this.state = {
       f_id:'',
       f_name:'',
@@ -30,17 +32,6 @@ export default class Chat extends Component {
       u_email:'',
       text:'',
       chatData:[],
-      data: [
-        {id:1, date:"9:50 am", type:'in',  message: "Lorem ipsum dolor sit amet"},
-        {id:2, date:"9:50 am", type:'out', message: "Lorem ipsum dolor sit amet"} ,
-        {id:3, date:"9:50 am", type:'in',  message: "Lorem ipsum dolor sit a met"}, 
-        {id:4, date:"9:50 am", type:'in',  message: "Lorem ipsum dolor sit a met"}, 
-        {id:5, date:"9:50 am", type:'out', message: "Lorem ipsum dolor sit a met"}, 
-        {id:6, date:"9:50 am", type:'out', message: "Lorem ipsum dolor sit a met"}, 
-        {id:7, date:"9:50 am", type:'in',  message: "Lorem ipsum dolor sit a met"}, 
-        {id:8, date:"9:50 am", type:'in',  message: "Lorem ipsum dolor sit a met"},
-        {id:9, date:"9:50 am", type:'in',  message: "Lorem ipsum dolor sit a mesaddsat"},
-      ]
     }
   }
 
@@ -60,6 +51,7 @@ export default class Chat extends Component {
     console.log('Retrieving chat data...')
     let cData=[]
     let component = this
+    // Listener for messages
     database.ref('Messages').on('child_added', function (snapshot) {
       console.log("Child added")
       const { timestamp: numberStamp, text, user,name,femail,fid } = snapshot.val();
@@ -81,42 +73,14 @@ export default class Chat extends Component {
     })
   }
 
-  /*refOn = () => {
-    console.log('Retrieving chat data...')
-    return new Promise((resolve,reject)=>{
-        let cData=[]
-        database.ref('Messages').on('child_added', function (snapshot) {
-          console.log("Child added")
-          const { timestamp: numberStamp, text, user,name,femail,fid } = snapshot.val();
-          const { key: id } = snapshot;
-          const { key: _id } = snapshot; 
-          const timestamp = new Date(numberStamp);
-          const message = {
-            femail,
-            fid,
-            text,
-            timestamp,
-            user
-          };
-        cData.push(message)
-        console.log('Chat data ==')
-        console.log(cData)
-        resolve(cData)
-        // Update the chat data used to update the UI
-        this.setState({chatData:cData})
-      })
-    })
-  }*/
-
   // Remove listeners for Messages collection in realtime DB
   refOff() {
     console.log("Unmounting chat component...")
     database.ref('Messages').off();
   }
 
-  // Get current user and target user for messaging
+  // Get current user and target user data for messaging
   retrieveData = async() => {
-      console.log("calling retrieveData")
       let fid = this.props.route.params.fid
       let fname = this.props.route.params.fname
       let femail = this.props.route.params.femail
@@ -194,44 +158,19 @@ export default class Chat extends Component {
     console.log(this.state)
     // For each chat message...
     let chats=Data.map((c_data)=>{
-          //console.log('Chat message (c_data):')
-          //console.log(c_data)
           // Check if message is SENT or RECEIVED
           if(this.state.f_id==c_data.fid && this.state.u_id==c_data.user.uid || this.state.f_id==c_data.user.uid && this.state.u_id==c_data.fid){
               // Sent Message
               if(this.state.u_id==c_data.user.uid){
-                  //console.log('Sent message:')
-                  //console.log(c_data.text)
                   return(
-                    <View   style={{
-                      backgroundColor:"#91d0fb",
-                      //padding:15,
-                      marginLeft:'50%',
-                      borderRadius:4,
-                      marginBottom:20, 
-                      width:'50%',
-                      maxWidth: 500,
-                      padding: 15,
-                      borderRadius: 20,
-                      }}>  
+                    <View style={styles.itemOut}>  
                     <Text style={{fontSize:16,color:"#000" }}> {c_data.text}</Text>
                     </View>
                   )
                // Received Message
               }else{
-                  //console.log('Received Message:')
-                  //console.log(c_data.text)
                   return(
-                    <View   style={{
-                      backgroundColor:"#dedede",
-                      //padding:15,
-                      borderRadius:4,
-                      marginBottom:20, 
-                      width:'50%',
-                      maxWidth: 500,
-                      padding: 15,
-                      borderRadius: 20,
-                      }}>             
+                    <View style={styles.itemIn}>             
                           <Text style={{fontSize:16,color:"#000" }}> {c_data.text}</Text>
                     </View>
                   )
@@ -241,40 +180,53 @@ export default class Chat extends Component {
 
     return (
         <View style={styles.container}>
-            <View style={{
-                height:screenHeight - 150,
-                marginVertical: 20,
-                flex: 1,
-                flexDirection: 'row',
-                backgroundColor:"#eeeeee",
-                borderRadius:10,
-                padding:0,
-              }}>
-              <ScrollView
-                ref = {ref => {this.scrollView = ref}}
-                // Scroll to bottom when a new message is received
-                onContentSizeChange={() => this.scrollView.scrollToEnd({animated: true})}>       
-                  {chats} 
-              </ScrollView>
-            </View>
-            <View style={styles.footer}>
-                <View style={styles.inputContainer}>
-                  <TextInput style={styles.inputs}
-                      placeholder="Write a message..."
-                      underlineColorAndroid='transparent'
-                      ref={input => { this.textInput = input }}
-                      onChangeText={(msg) => this.setState({text:msg})}/>
-                </View>
-                <TouchableOpacity style={styles.btnSend} onPress={this.onSend}>
-                    <Image source={{uri:"https://png.icons8.com/small/75/ffffff/filled-sent.png"}} style={styles.iconSend}  />
-                </TouchableOpacity>
-            </View>
+          <ImageBackground
+            style={styles.background}
+            source={require("../assets/pawprints.jpg")}>
+              <View style={styles.top_header}>
+                <Image style={styles.header_icon} source={require('../assets/paw.png')}></Image>
+                <Text style={styles.header_text}>Chatting with: {this.state.f_name}</Text>
+                <Image style={styles.header_icon} source={require('../assets/paw.png')}></Image>
+              </View>
+              <View style={{
+                  height:screenHeight - 150,
+                  marginVertical: 20,
+                  flex: 1,
+                  flexDirection: 'row',
+                  backgroundColor: "#363636",
+                  borderRadius:10,
+                  padding:10,
+                }}>
+                <ScrollView
+                  ref = {ref => {this.scrollView = ref}}
+                  // Scroll to bottom when a new message is received
+                  onContentSizeChange={() => this.scrollView.scrollToEnd({animated: true})}>       
+                    {chats} 
+                </ScrollView>
+              </View>
+              <View style={styles.footer}>
+                  <View style={styles.inputContainer}>
+                    <TextInput style={styles.inputs}
+                        placeholder="Write a message..."
+                        underlineColorAndroid='transparent'
+                        ref={input => { this.textInput = input }}
+                        onChangeText={(msg) => this.setState({text:msg})}/>
+                  </View>
+                  <TouchableOpacity style={styles.btnSend} onPress={this.onSend}>
+                      <Image source={{uri:"https://png.icons8.com/small/75/ffffff/filled-sent.png"}} style={styles.iconSend}  />
+                  </TouchableOpacity>
+              </View>
+            </ImageBackground>
         </View>
       )
     }
 }
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    resizeMode: "contain",
+  },
   container:{
     flex:1
   },
@@ -284,9 +236,27 @@ const styles = StyleSheet.create({
   footer:{
     flexDirection: 'row',
     height:60,
-    backgroundColor: '#eeeeee',
+    backgroundColor: '#757575',
     paddingHorizontal:10,
     padding:5,
+  },
+  top_header: {
+    backgroundColor: "#5c5c5c",
+    padding:10,
+    textAlign: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  header_icon: {
+    width:30,
+    height:30,
+    marginRight: 5,
+    marginLeft: 5,
+  },
+  header_text: {
+    color: '#16aef5',
+    fontWeight: 'bold',
+    fontSize: 20,
   },
   btnSend:{
     backgroundColor:"#00BFFF",
@@ -303,7 +273,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     borderBottomColor: '#F5FCFF',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#363636',
     borderRadius:30,
     borderBottomWidth: 1,
     height:40,
@@ -311,24 +281,42 @@ const styles = StyleSheet.create({
     alignItems:'center',
     flex:1,
     marginRight:10,
+    color: '#bec1c2'
   },
   inputs:{
     height:40,
     marginLeft:16,
     borderBottomColor: '#FFFFFF',
     flex:1,
+    color: '#bec1c2'
   },
   balloon: {
     maxWidth: 500,
     padding: 15,
     borderRadius: 20,
-    
   },
   itemIn: {
-    alignSelf: 'flex-start'
+    alignSelf: 'flex-start',
+    backgroundColor:"#dedede",
+    //padding:15,
+    borderRadius:4,
+    marginBottom:20, 
+    width:'50%',
+    maxWidth: 500,
+    padding: 15,
+    borderRadius: 20
   },
   itemOut: {
-    alignSelf: 'flex-end'
+    alignSelf: 'flex-end',
+    backgroundColor:"#91d0fb",
+    //padding:15,
+    marginLeft:'50%',
+    borderRadius:4,
+    marginBottom:20, 
+    width:'50%',
+    maxWidth: 500,
+    padding: 15,
+    borderRadius: 20,
   },
   time: {
     alignSelf: 'flex-end',

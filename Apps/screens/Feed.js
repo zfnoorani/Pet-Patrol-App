@@ -32,7 +32,6 @@ function LostPets(props) {
     >
       <Text style={styles.title}>Feed</Text>
       {/* <Button title={"logout"} onPress={props.route.params.logout} /> */}
-
       <ScrollView>
         {posts.map((item, i) => {
           return (
@@ -66,10 +65,6 @@ function LostPets(props) {
                     <Text style={styles.description}>Breed :{item.breed}</Text>
                     <Text style={styles.description}>Info :{item.info}</Text>
                     <Text style={styles.description}>Location :{item.town}</Text>
-
-
-
-
                   </View>
                 </View>
               </View>
@@ -87,88 +82,8 @@ function LostPets(props) {
     </ImageBackground>
   );
 }
-// <ScrollView style={styles.postContainer}>
-//         <TouchableOpacity>
-//           <Text style={[styles.lostFoundTitle, styles.found]}>Found</Text>
-//           <View style={[styles.post, styles.found]}>
-//             <View style={styles.lostFoundContainer}>
-//               <Image
-//                 style={styles.icon}
-//                 source={require("../assets/doge.jpg")}
-//               ></Image>
-//             </View>
-//             <View style={styles.descriptionContainer}>
-//               <Text style={styles.name}>Doge</Text>
-//               <Text style={styles.description}>Aurora, IL</Text>
-//               <Text style={styles.description}>3 Days</Text>
-//             </View>
-//           </View>
-//           <View style={styles.userTimestamp}>
-//             <Text style={styles.username}>PetPatroller417</Text>
-//             <Text style={styles.timestamp}>3/15/2021 8:30 PM</Text>
-//           </View>
-//         </TouchableOpacity>
-//         <TouchableOpacity>
-//           <Text style={[styles.lostFoundTitle, styles.lost]}>Lost</Text>
-//           <View style={[styles.post, styles.lost]}>
-//             <View style={styles.lostFoundContainer}>
-//               <Image
-//                 style={styles.icon}
-//                 source={require("../assets/cat1.jpg")}
-//               ></Image>
-//             </View>
-//             <View style={styles.descriptionContainer}>
-//               <Text style={styles.name}>Elmo</Text>
-//               <Text style={styles.description}>Naperville, IL</Text>
-//               <Text style={styles.description}>5 Days</Text>
-//             </View>
-//           </View>
-//           <View style={styles.userTimestamp}>
-//             <Text style={styles.username}>PuppyLover444</Text>
-//             <Text style={styles.timestamp}>3/15/2021 6:30 PM</Text>
-//           </View>
-//         </TouchableOpacity>
-//         <TouchableOpacity>
-//           <Text style={[styles.lostFoundTitle, styles.found]}>Found</Text>
-//           <View style={[styles.post, styles.found]}>
-//             <View style={styles.lostFoundContainer}>
-//               <Image
-//                 style={styles.icon}
-//                 source={require("../assets/cat3.jpg")}
-//               ></Image>
-//             </View>
-//             <View style={styles.descriptionContainer}>
-//               <Text style={styles.name}>Ace</Text>
-//               <Text style={styles.description}>Chicago, IL</Text>
-//               <Text style={styles.description}>3 Hours</Text>
-//             </View>
-//           </View>
-//           <View style={styles.userTimestamp}>
-//             <Text style={styles.username}>CatLadyZee</Text>
-//             <Text style={styles.timestamp}>3/28/2021 9:30 PM</Text>
-//           </View>
-//         </TouchableOpacity>
-//         <TouchableOpacity>
-//           <Text style={[styles.lostFoundTitle, styles.lost]}>Lost</Text>
-//           <View style={[styles.post, styles.lost]}>
-//             <View style={styles.lostFoundContainer}>
-//               <Image
-//                 style={styles.icon}
-//                 source={require("../assets/cat2.jpg")}
-//               ></Image>
-//             </View>
-//             <View style={styles.descriptionContainer}>
-//               <Text style={styles.name}>Elmo</Text>
-//               <Text style={styles.description}>Schaumburg, IL</Text>
-//               <Text style={styles.description}>7 days</Text>
-//             </View>
-//           </View>
-//           <View style={styles.userTimestamp}>
-//             <Text style={styles.username}>PeppaPig777</Text>
-//             <Text style={styles.timestamp}>3/28/2021 10:30 PM</Text>
-//           </View>
-//         </TouchableOpacity>
-//       </ScrollView>
+
+// Styling
 const styles = StyleSheet.create({
   background: {
     flex: 1,
@@ -180,7 +95,7 @@ const styles = StyleSheet.create({
     textAlign: "left",
     borderWidth: 4,
     padding: 10,
-    backgroundColor: "#4169e1",
+    backgroundColor: "#910606",
   },
 
   description: {
@@ -196,9 +111,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     fontWeight: "bold",
     alignItems: "center",
-
-
-  
   },
 
   icon: {
@@ -229,7 +141,7 @@ const styles = StyleSheet.create({
   },
 
   lost: {
-    backgroundColor: "#f55b38",
+    backgroundColor: "#910606",
   },
 
   lostFoundContainer: {

@@ -46,14 +46,7 @@ const MenuScreen = ({navigation}) => {
                           // No user is signed in.
                         }
                       });
-                    /*navigation.navigate('ChatUsers', {                
-                        name: "datboi",                   
-                        email: "datboi@gmail.com",             
-                        avatar: null,                    
-                        uid:"IXcZLwjsynZi0wwzbZzhy85kPL42",                
-                        username:"datboi",         
-                        uemail:"datboi@gmail.com"
-                    })*/}}>
+                    }}>
                     <Text style={styles.button}>
                         Messages
                     </Text>
@@ -81,7 +74,8 @@ const styles = StyleSheet.create({
         textAlign: 'left',
         borderWidth: 4,
         padding: 10,
-        backgroundColor: '#4169e1',   
+        backgroundColor: '#4169e1',
+        marginBottom: -4,   
     },
 
     menu: {
@@ -90,7 +84,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         paddingTop: 75,
         paddingBottom: 100,
-
     },
 
     view: {

@@ -7,11 +7,11 @@ import {
     TouchableOpacity,
     ScrollView,
     Dimensions,
+    ImageBackground,
     AsyncStorage,
    TextInput
   } from 'react-native';
 const screenWidth = Math.round(Dimensions.get('window').width);
-import firebaseSvc from '../../firebaseSDK'
 import { auth, fire, database } from "../../fbconfig";
 
 
@@ -75,182 +75,119 @@ export default class Users extends Component {
     
   }
 
-  /*getUsers=()=>{
-    let users=[]
-    return new Promise((resolve,reject)=>{
-      var docRef = fire.collection("Users")
-          docRef.get().then(function(querySnapshot) {
-              querySnapshot.forEach(function(doc) {
-                  users.push(doc.data())
-                  this.setState({auth_data:users})
-              },resolve(users)) 
-          })
-      })
-  }*/
-
-  /*User_data=()=>{
-    firebaseSvc.usersData().then((solve)=>{
-        this.setState({auth_data:solve})
-    }).catch((fail)=>{
-      console.log('not getting data')
-    })
-  }*/
-
   render() {
     let Data=this.state.auth_data
     console.log('data')
     console.log(Data)
-    console.log(Data.length)
-    let test = ['hello', 'dog'];
-    console.log(test)
-    test.map((user)=>{console.log(user)})
-    Data.map((u)=>{console.log("???")})
     console.log("After test...")
     let User=Data.map((u_data)=>{
         console.log('u_data')
         console.log(u_data)
-        return(
-          <View style={styles.backarrow}>
-              <TouchableOpacity onPress={()=> this.props.navigation.navigate('ChatRoom',{
-                    uemail:this.state.uemail,
-                    uid:this.state.uid,
-                    username:this.state.uname,
-                    fid:u_data.uid,
-                    fname:u_data.username,
-                    femail:u_data.email
-                })}>
-                <View style={styles.list}  >
-                      <View  style={ styles.forwidth_left}> 
-                            <TouchableOpacity >
-                                <Image style={{ 
-                                  width: 70, 
-                                  height: 70,
-                                    borderRadius:87, 
-                                    position:'absolute', 
-                                    top:0, 
-                                    left:0 
-                                  }} source={require('../assets/images/no_image.jpg')} />
-                            </TouchableOpacity>
-                        </View>
-                      <View style={ styles.forwidth_right}> 
-                        <Text style={ styles.price}> {u_data.username}</Text>
-                          <Text style={ styles.carname}> {u_data.email}</Text> 
+        // Show all other users
+        if (this.state.uid != u_data.uid){
+          return(
+            <TouchableOpacity onPress={()=> this.props.navigation.navigate('ChatRoom',{
+              uemail:this.state.uemail,
+              uid:this.state.uid,
+              username:this.state.uname,
+              fid:u_data.uid,
+              fname:u_data.username,
+              femail:u_data.email
+            })}>
+              <View style={styles.listing}>
+                    <View style={styles.list}  >
+                          <View> 
+                              <TouchableOpacity >
+                                  <Image style={styles.user_icon} source={require('../assets/doge.jpg')} />
+                              </TouchableOpacity>
+                          </View>
+                          <View> 
+                            <Text style={styles.username}> {u_data.username}</Text>
+                          </View>
                       </View>
-                  </View>
+                  
+                </View>
               </TouchableOpacity>
-            </View>
-
-        )
+          )
+        }
       })
     return (
       <View style={styles.container}>
-          <TouchableOpacity>
-              <View style={styles.top_header}  >
-                    <TouchableOpacity>
-                      <Image style={styles.nav_icon} source={require('../assets/images/nav.png')} />
-                    </TouchableOpacity> 
-                    <TouchableOpacity>
-                        <View style={styles.search_header} >
-                            <Image style={styles.search_icon} source={require('../assets/images/search.png')} />
-                            <TextInput  style={styles.search_box} 
-                            keyboardType='web-search'
-                            placeholder='search name'/>
-                        </View> 
-                    </TouchableOpacity> 
-                </View>
-          </TouchableOpacity>	
+        <ImageBackground
+            style={styles.background}
+            source={require("../assets/pawprints.jpg")}>
+          <View style={styles.top_header}>
+            <Image style={styles.header_icon} source={require('../assets/paw.png')}></Image>
+            <Text style={styles.header_text}>Chat with fellow Pet Patrollers</Text>
+            <Image style={styles.header_icon} source={require('../assets/paw.png')}></Image>
+          </View>
           <View style={styles.home_padding}>
               <ScrollView>
                   {User}
               </ScrollView>
           </View>
+          </ImageBackground>
       </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-   flex: 1,
-   paddingTop: 22
+  background: {
+    flex: 1,
+    resizeMode: "contain",
   },
-  backarrow: {
-    paddingBottom: 50,
+  container: {
+    flex: 1,
+  },
+  listing: {
+    paddingBottom: 10,
+    paddingTop: 10,
+    paddingLeft:10,
+    borderWidth: 3,
+    marginBottom: -3,
+    backgroundColor: "#363636",
     flexDirection: 'row',
+    //justifyContent: 'center'
   },
   top_header: {
-    backgroundColor: "#ffffff",
+    backgroundColor: "#5c5c5c",
     padding:10,
+    textAlign: 'center',
     flexDirection: 'row',
-},
-nav_icon: {
-    width:40,
-    height:40,
-},
-search_header: {
-    width: screenWidth - 100,
-    flexDirection: 'row',
-},
-search_icon: {
+    justifyContent: 'center',
+  },
+  header_icon: {
     width:30,
     height:30,
-    margin:5,
-},
-search_box: {
-    //height: 40,
-    paddingTop: 10,
-    //paddingBottom: 5,
-    borderBottomColor: '#fff',
-    color:'#000000',
-    fontSize: 15,
-    opacity:1,
-    width: screenWidth - 200,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    //fontFamily:"Poppins"
-},
-home_padding: {
-    padding:10,
-    backgroundColor: "#ffffff",	
-    flex: 1
-},
-list_img: {
-    width:'100%',
-    height:115,
-    marginRight: 4,
-    borderTopLeftRadius:8,
-    borderTopRightRadius:8,
-},
-forwidth_left:{
-         width:'30%',
-         //paddingBottom:30
-    },
-    forwidth_right:
-    {width:'50%'
-},
-price:{color: '#0b85bd',fontSize: 18, /* paddingTop:20 */}, 
-carname:{color: '#010000',fontSize: 10,}, 
-     list_img: {
-		width:'100%',
-		height:115,
-		marginRight: 4,
-		borderTopLeftRadius:8,
-		borderTopRightRadius:8,
-    },
-    list:{
-      width: '100%',
-    flexDirection: 'row',
-    borderBottomColor:'#e3e3e1',
-     // borderBottomWidth:2 ,
-     paddingTop:0,
-    paddingBottom:0,
-    
-		//marginTop: 3,
-		//width: screenWidth / 2 - 30,
-		//marginRight: 20		
-	},
-  item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44,
+    marginRight: 5,
+    marginLeft: 5,
   },
+  header_text: {
+    color: '#16aef5',
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
+  user_icon: {
+    width: 70, 
+    height: 70,
+    borderRadius:85, 
+    top:0, 
+    left:0,
+  },
+  home_padding: {
+      padding:10,
+      //backgroundColor: "#363636",
+      flex: 1
+  },
+  username:{color: '#16aef5', fontSize: 35, marginLeft: 5},
+  list:{
+      //width: '100%',
+      flexDirection: 'row',
+      borderBottomColor:'#e3e3e1',
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingTop:0,
+      paddingBottom:0,
+    },
 })
