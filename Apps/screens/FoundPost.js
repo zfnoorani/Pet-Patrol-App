@@ -110,21 +110,8 @@ const App = ({ navigation }) => {
     >
       <ScrollView>
         <View>
-
           <Text style={styles.heading}>Found Pet Form </Text>
           <View>
-            <TextInput
-              style={styles.questions}
-              placeholder="First Name"
-              selectedValue={name}
-              onChangeText={(name) => setName(name)}
-            />
-            <TextInput
-              style={styles.questions}
-              placeholder="Last Name"
-              selectedValue={lastName}
-              onChangeText={(lastName) => setLastName(lastName)}
-            />
             <Text style={styles.baseText}>{valuefrom}</Text>
             <Text style={styles.heading2}>Type of Pet</Text>
             <Picker

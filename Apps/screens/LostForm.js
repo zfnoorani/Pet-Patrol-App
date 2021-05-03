@@ -126,18 +126,6 @@ const App = ({ navigation }) => {
 
           <Text style={styles.heading}>Lost Pet Form </Text>
           <View>
-            <TextInput
-              style={styles.questions}
-              placeholder="First Name"
-              selectedValue={name}
-              onChangeText={(name) => setName(name)}
-            />
-            <TextInput
-              style={styles.questions}
-              placeholder="Last Name"
-              selectedValue={lastName}
-              onChangeText={(lastName) => setLastName(lastName)}
-            />
             <Text style={styles.baseText}>{valuefrom}</Text>
             <Text style={styles.heading2}>Type of Pet</Text>
             <Picker
@@ -239,7 +227,7 @@ const App = ({ navigation }) => {
               title="Review Lost Form"
               onPress={() => {
                 navigation.navigate("Flyer", {
-                  name: name,
+                  username: auth.currentUser.displayName,
                   lastName: lastName,
                   itemName: pet,
                   timeStamp: time,
