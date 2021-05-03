@@ -76,8 +76,7 @@ const App = ({ navigation }) => {
     fire
       .collection("muUsers")
       .add({
-        first: name,
-        last: lastName,
+        username: auth.currentUser.displayName,
         pet: pet,
         color: color,
         breed: breed,
@@ -190,18 +189,6 @@ const App = ({ navigation }) => {
       <View>
         <Text style={styles.heading}>Found Pet Form </Text>
         <View>
-          <TextInput
-            style={styles.questions}
-            placeholder="First Name"
-            selectedValue={name}
-            onChangeText={(name) => setName(name)}
-          />
-          <TextInput
-            style={styles.questions}
-            placeholder="Last Name"
-            selectedValue={lastName}
-            onChangeText={(lastName) => setLastName(lastName)}
-          />
           <Text style={styles.baseText}>{valuefrom}</Text>
           <Text style={styles.heading2}>Type of Pet</Text>
           <Picker
@@ -295,8 +282,7 @@ const App = ({ navigation }) => {
             title="Review Found Post"
             onPress={() => {
               navigation.navigate("Flyer", {
-                name: name,
-                lastName: lastName,
+                username: auth.currentUser.displayName,
                 itemName: pet,
                 timeStamp: time,
                 colorName: color,

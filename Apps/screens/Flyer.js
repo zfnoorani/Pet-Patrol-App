@@ -7,7 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 const App = ({ route, navigation }) => {
   
  
-  const { name, lastName, itemName, timeStamp, colorName, danger, breed, info, townName } = route.params;
+  const { username, lastName, itemName, timeStamp, colorName, danger, breed, info, townName } = route.params;
  
   
  
@@ -22,8 +22,7 @@ const App = ({ route, navigation }) => {
     source={require('../assets/icon.png')}>
     <View >
     <Text>Here is your flyer!</Text>
-      <Text>Name: {JSON.stringify(name)}</Text>
-      <Text>LastName: {JSON.stringify(lastName)}</Text>
+      <Text>Username: {JSON.stringify(username)}</Text>
       <Text>Pet: {JSON.stringify(itemName)}</Text>
       {/* <Text>Time: {JSON.stringify(timeStamp)}</Text> */}
       <Text>Color: {JSON.stringify(colorName)}</Text>

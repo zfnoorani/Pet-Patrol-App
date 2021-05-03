@@ -70,7 +70,7 @@ function LostPets(props) {
               </View>
               <View style={styles.userTimestamp}>
                 <Text style={styles.username}>
-                  {item.first} {item.last}
+                  {item.username}
                 </Text>
                 {/* <Text style={styles.username}>{item.last}</Text> */}
                 <Text style={styles.timestamp}>{item.time}</Text>
