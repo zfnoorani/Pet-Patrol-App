@@ -1,3 +1,4 @@
+// This flyer is for users to preview the flyer before submitting
 import React, { useState, Component } from "react";
 
 import {
@@ -11,7 +12,6 @@ import {
 } from "react-native";
 
 const App = ({ route, navigation }) => {
-
 
   const { username, lastName, itemName, timeStamp, colorName, danger, breed, info, townName } = route.params;
 
