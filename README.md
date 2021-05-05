@@ -1,3 +1,5 @@
+## NEED EXPO, REACT, NPM, YARN
+
 
 ## If dependency error do the following:
 `expo install`
@@ -24,10 +26,5 @@ ________________________________________________________________________________
 
 
 
-Install 
-npm install express
-npm install body-parser
-npm install mariadb
-Let Kristen know if it doesn't work
 
 
